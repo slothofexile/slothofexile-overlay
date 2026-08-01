@@ -1,3 +1,4 @@
+<img width="1923" height="1083" alt="image" src="https://github.com/user-attachments/assets/a75514c0-18a2-4532-ad92-f2f106ea1a2b" />
 
 [![Watch the video](https://youtube.com)](https://youtu.be/nuFQWeiMySc)
 
@@ -26,7 +27,7 @@ The biggest reason I'm releasing the exe anyway is because with the league just 
 
 **What's next?**
 
-Right now, it has just one preset (lighting, shadows, color, etc...) so far, and that's coastal hideout because that's my hideout. When I get client.txt parsing working, I can start making other presets for the rest of the areas. As much as I'd love to work on this full time, I got a day job and a family, so they comes 1st.
+Right now, it has just one preset (lighting, shadows, color, etc...) so far, and that's coastal hideout because that's my hideout. When I get client.txt parsing working, I can start making other presets for the rest of the areas. As much as I'd love to work on this full time, I got a day job and a family, so they come 1st.
 
 
 **How To:**
