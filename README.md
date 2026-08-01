@@ -11,7 +11,7 @@
 
 **About this project:**
 
-I've been playing Path of Exile since Legacy league and I've always wanted to play with a character overlay but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Blender.
+I've been playing Path of Exile since Legacy league and I've always wanted to play with a character overlay but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
 It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far).
 
@@ -23,7 +23,7 @@ As of this writing (1st week of 3.29 Allflame League), the model I have on it is
 
 **Why no code?**
 
-Because it's bad, that's why. I don't think it's good enough yet and I have so much to do -- area timer, client.txt parsing, area presets, etc... First time using Github, even.
+Because it's bad, that's why. I don't think it's good enough yet and I have so much to do -- area timer, client.txt parsing, area presets, etc... I'll publish it when it's somewhat better. I don't even know how, as this is also my first time using Github. 
 
 The biggest reason I'm releasing the exe anyway is because with the league just starting, releasing something now should give more people more time to find it, use it, have fun with it, or even just have a good laugh. 
 
