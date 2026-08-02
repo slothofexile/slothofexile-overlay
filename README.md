@@ -25,6 +25,7 @@ As of this writing (1st week of 3.29 Allflame League), the model I have on it is
 It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far). I don't think it's good enough yet and I have so much to do -- area timer, client.txt parsing, area presets, etc... I'll publish it when it's somewhat better. I don't even know how, as this is also my first time using Github. 
 
 Check out this mess of 3d asset imports into Godot. All I know for know is that it works, so I don't dare clean it up and have something break.
+
 <img width="323" height="568" alt="image" src="https://github.com/user-attachments/assets/4dab5f0e-d66a-4774-901c-d1e694ddbc92" />
 
 
