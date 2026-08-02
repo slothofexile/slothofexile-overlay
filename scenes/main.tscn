@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://dpjjyhab6ponh"]
+
+[ext_resource type="Script" uid="uid://cj017cqo85fcp" path="res://scripts/overlay_main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c00jp4yujh2jn" path="res://assets/models/cheems 3.29/cheems v3.28.3 eyepatch + boat + cheems + hat + pole + flag joined v2.glb" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dwcoa6svmghc6" path="res://assets/models/cheems 3.29/cheems v3.28_Old_Rowboat_UVMap_color.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dc5ui6dl17g4" path="res://assets/models/cheems 3.29/cheems v3.28_Old_Rowboat_UVMap_rough.png" id="4_7mycd"]
+[ext_resource type="Shader" uid="uid://bct4iwn2at6fj" path="res://shaders/shadowcatcher.gdshader" id="5_272bh"]
+[ext_resource type="Script" uid="uid://bt2ltompsmaxf" path="res://scripts/area_manager.gd" id="6_5vw27"]
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="7_kek77"]
+[ext_resource type="Resource" uid="uid://b7xvcs4kfsecb" path="res://data/presets/coastal_hideout.tres" id="8_4c57u"]
+
+[sub_resource type="Environment" id="Environment_cmnmv"]
+ambient_light_source = 2
+ambient_light_color = Color(0.9428228, 0.94282264, 0.94282264, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+cull_mode = 2
+albedo_color = Color(0.6214008, 0.53267705, 0.48558897, 1)
+albedo_texture = ExtResource("3_lquwl")
+roughness_texture = ExtResource("4_7mycd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+render_priority = 0
+shader = ExtResource("5_272bh")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_opacity = 0.65
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_85g3d"]
+size = Vector2(20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
+
+[node name="OverlayMain" type="Node3D" unique_id=798838362 node_paths=PackedStringArray("target_model", "hook_node", "ground_plane")]
+script = ExtResource("1_0xm2m")
+target_model = NodePath("cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2")
+hook_node = NodePath("cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/rowboat/cheems?/fishing_rod_hook_0")
+ground_plane = NodePath("cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
+offset_y_pixels = -75.0
+active_preset = ExtResource("8_4c57u")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1564820067]
+transform = Transform3D(1, 0, 0, 0, 0.75114435, 0.660138, 0, -0.660138, 0.75114435, -0.27239442, 17.090057, 15.406284)
+current = true
+fov = 71.8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1911351698]
+environment = SubResource("Environment_cmnmv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=532552838]
+transform = Transform3D(0.70710677, 0.49999997, -0.49999997, 0, 0.70710677, 0.70710677, 0.70710677, -0.49999997, 0.49999997, -2.3425493, 5.560202, 4.6745114)
+light_color = Color(1, 0.95686275, 0.8980392, 1)
+light_energy = 1.05
+shadow_enabled = true
+
+[node name="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2" parent="." unique_id=1589565584 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027126282, -0.00029182434, -0.013643503)
+
+[node name="Sketchfab_model" parent="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2" index="0" unique_id=1009451864]
+transform = Transform3D(-1, 1.5099579e-07, 6.6002357e-15, 0, -4.3711385e-08, 0.99999994, 1.509958e-07, 0.99999994, 4.3711385e-08, 0, 0, 0)
+
+[node name="rowboat" parent="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2" index="2" unique_id=2049322106]
+material_override = SubResource("StandardMaterial3D_h2yge")
+
+[node name="0" parent="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/rowboat" index="0" unique_id=1352649061]
+blend_shapes/target_0 = 1.0
+
+[node name="PoleTip" type="Marker3D" parent="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/rowboat/cheems?/fishing_rod_0" parent_id_path=PackedInt32Array(1589565584, 613654485) index="0" unique_id=195025742]
+transform = Transform3D(1, -2.9802322e-08, 0, -2.9802322e-08, 1.0000006, 1.4901161e-07, -2.9802322e-08, 1.4901161e-07, 1.0000005, -0.042305604, 0.051724404, 2.0113864)
+
+[node name="Plane" parent="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2" index="6" unique_id=1758271119]
+transform = Transform3D(19.62206, 0, 0, 0, 19.62206, 0, 0, 0, 19.62206, -0.425, -0.2, 1.343)
+material_override = SubResource("ShaderMaterial_tipki")
+mesh = SubResource("PlaneMesh_85g3d")
+surface_material_override/0 = SubResource("StandardMaterial3D_tipki")
+
+[node name="AnimationPlayer" parent="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2" index="7" unique_id=1278182260]
+autoplay = &"flag|Action"
+speed_scale = 0.25
+
+[node name="AreaManager" type="Node" parent="." unique_id=1203549999 node_paths=PackedStringArray("camera", "directional_light", "world_environment", "shadow_plane")]
+script = ExtResource("6_5vw27")
+camera = NodePath("../Camera3D")
+directional_light = NodePath("../DirectionalLight3D")
+world_environment = NodePath("../WorldEnvironment")
+shadow_plane = NodePath("../cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
+presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u")])
+
+[editable path="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2"]

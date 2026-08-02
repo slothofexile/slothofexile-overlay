@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://b7xvcs4kfsecb"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_o2bl3"]
+
+[resource]
+script = ExtResource("1_o2bl3")
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+camera_fov = 90.0
+light_rotation_degrees = Vector3(-32, 90, 0)
+light_color = Color(1, 0.9529412, 0.8784314, 1)
+light_energy = 0.6
+shadow_blur = 0.0
+ambient_color = Color(0.20392157, 0.28627452, 0.36862746, 1)
+ambient_energy = 1.0
+shadow_opacity = 0.455
+shadow_tint = Color(0.0018227947, 0.0036462676, 0.0072935307, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"

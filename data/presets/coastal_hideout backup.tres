@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://o8or54clc605"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_nc0yb"]
+
+[resource]
+script = ExtResource("1_nc0yb")
+light_color = Color(1, 0.9529412, 0.8784314, 1)
+ambient_color = Color(0.819719, 0.81831867, 0.80585265, 1)
+shadow_opacity = 0.324
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"
