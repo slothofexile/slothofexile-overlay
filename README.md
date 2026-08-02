@@ -22,7 +22,7 @@ As of this writing (1st week of 3.29 Allflame League), the model I have on it is
 
 **Why bad code?**
 
-It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far). I don't think it's good enough yet and I have so much to do -- area timer, client.txt parsing, area presets, etc... I'll publish it when it's somewhat better. I don't even know how, as this is also my first time using Github. 
+It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far). I don't think it's good enough yet and I have so much to do -- area timer, client.txt parsing, area presets, etc... This is also my first time using Github. 
 
 Check out this mess of 3d asset imports into Godot. All I know for know is that it works, so I don't dare clean it up and have something break.
 
@@ -32,6 +32,22 @@ Check out this mess of 3d asset imports into Godot. All I know for know is that 
 
 
 The biggest reason I'm releasing the exe anyway is because with the league just starting, releasing something now should give more people more time to find it, use it, have fun with it, or even just have a good laugh. 
+
+<br>
+<br>
+<br>
+
+**Any AI use?**
+
+Lots! But not where you think. 
+
+If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
+
+AI is absolutely useful in parts that aren't code -- specifically nuances in how a platform/environment like Godot would implement something like shadows or handles the whole environment. Knowing how to render a 2d sprite in AutoIT + Windows GDI API, translates poorly to Godot outside of the pure/basic math. 
+
+Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me.
+
+It's with these nuances in the platform that would have taken forever to learn, that's _not_ coding, , where AI was 120% helpful.
 
 <br>
 <br>
