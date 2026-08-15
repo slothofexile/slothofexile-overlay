@@ -39,13 +39,13 @@ The biggest reason I'm releasing the exe anyway is because with the league just 
 
 **Any AI use?**
 
-Lots! But not where you think. 
+Lots! But probably not where and how you think it's been used. 
 
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
 
-AI is absolutely useful in parts that aren't code -- specifically nuances in how a platform/environment like Godot would implement something like shadows or handles the whole environment. Knowing how to render a 2d sprite in AutoIT + Windows GDI API, translates poorly to Godot outside of the pure/basic math. 
+AI is absolutely useful in parts that aren't code -- specifically nuances in how a platform/environment. Like how Godot implements something like shadows or handles the whole environment. Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
 
-Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me.
+Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working.
 
 It's with these nuances in the platform that would have taken forever to learn, that's _not_ coding, , where AI was 120% helpful.
 
