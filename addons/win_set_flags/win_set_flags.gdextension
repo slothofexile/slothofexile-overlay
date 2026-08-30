@@ -1,9 +1,10 @@
 [configuration]
 
-entry_symbol = "win_set_flags_library_init"
+entry_symbol = "win_set_flags_init"
 compatibility_minimum = "4.7"
-
+reloadable = true
 
 [libraries]
 
 windows.debug.x86_64 = "res://addons/win_set_flags/bin/win_set_flags.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://addons/win_set_flags/bin/win_set_flags.windows.template_release.x86_64.dll"
