@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bt2ltompsmaxf" path="res://scripts/area_manager.gd" id="6_5vw27"]
 [ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="7_kek77"]
 [ext_resource type="Resource" uid="uid://b7xvcs4kfsecb" path="res://data/presets/coastal_hideout.tres" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://826mph7oo61y" path="res://scripts/tray_manager.gd" id="9_85g3d"]
 
 [sub_resource type="Environment" id="Environment_cmnmv"]
 ambient_light_source = 2
@@ -30,13 +31,8 @@ size = Vector2(20, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
 
-[node name="OverlayMain" type="Node3D" unique_id=798838362 node_paths=PackedStringArray("target_model", "hook_node", "ground_plane")]
+[node name="OverlayMain" type="Node3D" unique_id=798838362]
 script = ExtResource("1_0xm2m")
-target_model = NodePath("cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2")
-hook_node = NodePath("cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/rowboat/cheems?/fishing_rod_hook_0")
-ground_plane = NodePath("cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
-offset_y_pixels = -75.0
-active_preset = ExtResource("8_4c57u")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1564820067]
 transform = Transform3D(1, 0, 0, 0, 0.75114435, 0.660138, 0, -0.660138, 0.75114435, -0.27239442, 17.090057, 15.406284)
@@ -84,5 +80,8 @@ directional_light = NodePath("../DirectionalLight3D")
 world_environment = NodePath("../WorldEnvironment")
 shadow_plane = NodePath("../cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
 presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u")])
+
+[node name="TrayManager" type="Node" parent="." unique_id=1250105236]
+script = ExtResource("9_85g3d")
 
 [editable path="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2"]
