@@ -35,9 +35,9 @@ This is also inspired by these newer **animated/interactive** player/streamer ov
 &emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
 
   
-My overlay doesn't talk, but it does move. It interacts with Windows (not with the game) to figure out where your mouse is and follow it. 
+My overlay doesn't talk, but it does move. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
 
-The only interaction with the game is when _reading_ the game text logs to figure out what area you're in. Many of the 3rd-party tools also do this, like [CurrencyCop from way back](url) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](url) (which I still use), or [Lailoken's ExileUI](url).
+The only actual interaction with the game is when _reading_ the game text logs to figure out what area you're in. Many of the 3rd-party tools also do this, like [CurrencyCop from way back](url) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](url) (which I still use), or [Lailoken's ExileUI](url).
 
 
 <br>
