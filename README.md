@@ -2,8 +2,6 @@
 
 [![Watch the video](https://youtube.com)](https://youtu.be/nuFQWeiMySc)
 
-
-
 <br>
 <br>
 <br>
@@ -13,10 +11,14 @@
 
 Ever since I started playing PoE around Legacy league I had always wanted to play with a character overlay but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
-
 As of this writing (1st week of 3.29 Allflame League), the model I have on it is Cheems the shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. I can see all that getting updated with every new league if this project turns out to be a long term thing.
 
 <br>
+
+This isn't something new, nor is it unique to path of exile. This is inspired partly by these static streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
+
+https://i.imgur.com/E0mvBVP.jpeg
+
 <br>
 <br>
 
@@ -27,6 +29,7 @@ It's been slow going because I've had to learn Blender and Godot from scratch, a
 Just check out this mess of 3d asset imports into Godot. All I know for now is that it works, so I don't dare clean it up and have something break.
 
 <img width="323" height="568" alt="image" src="https://github.com/user-attachments/assets/4dab5f0e-d66a-4774-901c-d1e694ddbc92" />
+
 
 
 
