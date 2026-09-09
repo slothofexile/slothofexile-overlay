@@ -73,7 +73,7 @@ AI is absolutely useful in parts that aren't code -- specifically nuances in how
 
 Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working.
 
-It's with these nuances that would have taken forever to learn, that's _not_ coding, , where AI was 120% helpful.
+It was with these nuances that would have taken forever to learn, that _was not_ coding, where AI was 120% helpful.
 
 <br>
 <br>
