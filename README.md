@@ -28,6 +28,12 @@ This is also inspired by all these newer type of **animated/interactive** player
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/64b0fb5e-d006-469f-8ae7-318d3479ddb6" />
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/dec7e0c4-a924-4809-a093-d2337d45ccb7" />
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/54ecb7e1-e9df-406c-9bdf-9b10bbba9a9a" />
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/ca6e0ead-c3d5-4e1a-b537-5e75017cc4d7" />
+
+
+
 
 <br>
 &nbsp;
