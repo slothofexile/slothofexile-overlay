@@ -9,9 +9,9 @@
 
 **About this project:**
 
-Ever since I started playing PoE around Legacy league I had always wanted to play with a character overlay but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
+Ever since I started playing Path of Exile (some time around Legacy league) I had always wanted to play with a character overlay but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
-As of this writing (1st week of 3.29 Allflame League), the model I have on it is Cheems the shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. _I can see all that getting updated with every new league if this project turns out to be a long term thing._
+As of this writing (3.29 Allflame League on PoE1 ), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. _I can see all that getting updated with every new league if this project turns out to be a long term thing._
 
 <br>
 
@@ -23,19 +23,21 @@ This is inspired partly by these **static** player/streamer overlays that go on 
   
 &emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
 
-This is also inspired by the **animated/interactive** player/streamer overlays that react to something else.
+This is also inspired by these newer **animated/interactive** player/streamer overlays that react to something else.
 
-  This slime character on the lower right talks when the [player/streamer](url) talks:
+&emsp;This slime character on the lower right talks when the [player/streamer](url) talks:
   
-  <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
+&emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
 
 
-  Just like this animated/interactive [character/avatar](url) that also talks/moves:
+&emsp;Just like this animated/interactive [character/avatar](url) that also talks/moves:
   
-  <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
+&emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
 
   
+My overlay doesn't talk, but it does move. It interacts with Windows (not with the game) to figure out where your mouse is and follow it. 
 
+The only interaction with the game is when _reading_ the game text logs to figure out what area you're in. Many of the 3rd-party tools also do this, like [CurrecyCop from way back](url) (which I used), and newer ones like [Awakened PoE Trade](url) (which I've used), or [Lailoken's ExileUI](url).
 
 
 <br>
