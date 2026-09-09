@@ -19,26 +19,23 @@ As of this writing (3.29 Allflame League on PoE1), the model I have on it is Che
 
 This is inspired partly by these **static** player/streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
 
-&emsp;(This particular example is from 10 years ago [from reddit user Musti_A](url).)
+&emsp;(This particular example is from 10 years ago [from reddit user Musti_A](https://www.reddit.com/r/pathofexile/comments/5x9pgt/i_made_some_poe_twitch_stream_overlays_free/).)
   
 &emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
 
-This is also inspired by these newer **animated/interactive** player/streamer overlays that react to something else.
+This is also inspired by all these newer type of **animated/interactive** player/streamer overlays that react to something else -- like they also talk when the streamer talks/moves.
 
-&emsp;This slime character on the lower right talks when the [player/streamer](url) talks:
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/64b0fb5e-d006-469f-8ae7-318d3479ddb6" />
+<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
+
+<br>
+&nbsp;
   
-&emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
+My overlay doesn't talk, but it does rotate in place. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent Godot "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
 
 
-&emsp;Just like this animated/interactive [character/avatar](url) that also talks/moves:
-  
-&emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
-
-  
-My overlay doesn't talk, but it does rotate in place. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
-
-
-The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this, like [CurrencyCop from way back](url) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](url) (which I still use), or [Lailoken's ExileUI](url).
+The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this, like [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
 
 It doesn't mess with the game or any other players (which is more that I can say for some MTX out there, like that damned Goblin Band). 
 
