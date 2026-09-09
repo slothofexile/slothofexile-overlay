@@ -11,7 +11,7 @@
 
 I started playing Path of Exile (some time around Legacy league) and I had always wanted to play with a character overlay (like the streamers did) but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
-As of this writing (3.29 Allflame League on PoE1 ), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. _I can see all that getting updated with every new league if this project turns out to be a long term thing._
+As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. _I can see all that getting updated with every new league if this project turns out to be a long term thing._
 
 <br>
 
@@ -38,7 +38,7 @@ This is also inspired by these newer **animated/interactive** player/streamer ov
 My overlay doesn't talk, but it does move. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
 
 
-The only actual interaction with the game is when _reading_ the game text logs to figure out what area you're in. Many of the 3rd-party tools also do this, like [CurrencyCop from way back](url) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](url) (which I still use), or [Lailoken's ExileUI](url).
+The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this, like [CurrencyCop from way back](url) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](url) (which I still use), or [Lailoken's ExileUI](url).
 
 It doesn't mess with the game or any other players (which is more that I can say for some MTX out there, like that damned Goblin Band). 
 
