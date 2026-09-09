@@ -74,7 +74,7 @@ Just check out this mess of 3d asset imports into Godot. All I know for now is t
 
 **Any AI use?**
 
-Lots! _But probably not where and how you think it's been used. _
+Lots! _But probably not where and how you think it's been used._
 
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
 
