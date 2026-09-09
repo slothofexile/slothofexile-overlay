@@ -49,9 +49,9 @@ My overlay doesn't talk, but it does rotate in place. Functionally, it interacts
 
 The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this, like [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
 
-It doesn't mess with the game or any other players (which is more that I can say for some MTX out there, like that damned Goblin Band). 
+Only you and your audience can see the overlay. It doesn't mess with any other players (which is more that I can say for some MTX out there, like that damned Goblin Band). 
 
-Only you and your audience can see the overlay.
+
 
 
 <br>
