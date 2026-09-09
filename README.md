@@ -17,11 +17,24 @@ As of this writing (1st week of 3.29 Allflame League), the model I have on it is
 
 **Anyway, these things are neither new, nor unique to Path of Exile.**
 
-This is inspired partly by these static streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
+This is inspired partly by these **static** player/streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
 
-(This particular example is from 10 years ago [from reddit user Musti_A](url).)
+&emsp;(This particular example is from 10 years ago [from reddit user Musti_A](url).)
+  
+&emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
 
-<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
+This is also inspired by the **animated/interactive** player/streamer overlays that react to something else.
+
+  This slime character on the lower right talks when the [player/streamer](url) talks:
+  
+  <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
+
+
+  Just like this animated/interactive [character/avatar](url) that also talks/moves:
+  
+  <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00620ba9-c223-4338-8dae-351b29070b18" />
+
+  
 
 
 
