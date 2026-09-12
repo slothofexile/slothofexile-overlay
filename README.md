@@ -15,7 +15,7 @@
 
 **About this project:**
 
-I started playing Path of Exile (some time around Legacy league) and I had always wanted to play with a character overlay (like the streamers did) but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
+I started playing Path of Exile around Legacy league and I had always wanted to play with a character overlay (like the streamers did) but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
 As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. _I can see all that getting updated with every new league if this project turns out to be a long term thing._
 
@@ -76,6 +76,8 @@ Just check out this mess of 3d asset imports into Godot. All I know for now is t
 
 Lots! _But probably not where and how you think it's been used._
 
+Just free-tier chats.
+
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
 
 AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a specific platform/environment. Like how Godot implements something like shadows or handles the whole environment. Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
@@ -88,11 +90,6 @@ It was with these nuances that would have taken forever to learn, that _was not_
 <br>
 <br>
 
-**What's next?**
-
-Right now, it has just one preset (lighting, shadows, color, etc...) so far, and that's coastal hideout (because of course that's my hideout). It takes soooo much work to make just one preset because you have to eyeball everything --- sun angles, ambient light intensity, shadow tints, etc...
-
-When I get client.txt parsing working, I can start making other presets for the rest of the areas. As much as I'd love to work on this full time, I got a day job and a family, so they come 1st.
 
 <br>
 <br>
