@@ -63,7 +63,7 @@ It's been slow going because I've had to learn Blender and Godot from scratch, a
 
 Just check out this mess of 3d asset imports into Godot. All I know for now is that it works, so I don't dare clean it up and have something break.
 
-<img width="323" height="568" alt="image" src="https://github.com/user-attachments/assets/4dab5f0e-d66a-4774-901c-d1e694ddbc92" />
+<img width="162" height="284" alt="image" src="https://github.com/user-attachments/assets/4dab5f0e-d66a-4774-901c-d1e694ddbc92" />
 
 
 
@@ -76,15 +76,18 @@ Just check out this mess of 3d asset imports into Godot. All I know for now is t
 
 Lots! _But probably not where and how you think it's been used._
 
-Just free-tier chats.
-
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
 
-AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a specific platform/environment. Like how Godot implements something like shadows or handles the whole environment. Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
+AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a specific platform/environment. Like how Godot implements something like shadows or handles lighting, etc.... Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
 
 Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working.
 
-It was with these nuances that would have taken forever to learn, that _was not_ coding, where AI was 120% helpful.
+It was with these things that would have taken forever to learn, that _was not_ coding, where AI was 120% helpful. 
+
+Having said that, AI usage is still probably tiny compared to a non-programmer asking AI to just make everything (if that's even possible). Even with the smallest free-tier quota, I've never gone beyond single-digit % usage limits. (Don't tell Google or they'll cut back even more.)
+
+<img width="430" height="140" alt="image" src="https://github.com/user-attachments/assets/5481a257-4a98-4f05-9783-dd89d1f3bdd1" />
+
 
 <br>
 <br>
