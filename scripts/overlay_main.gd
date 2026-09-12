@@ -1,15 +1,11 @@
 extends Node3D
 
-# these @exports pre-date the ini, so many of them aren't needed but still keeping them anyway
+# all these @exports pre-date the ini, so they were useful when doing early iteration/prototyping
+# many of them aren't needed anymore but still keeping them anyway
 
 @export_category("Scene References")
 @export var camera: Camera3D
-@export var directional_light: DirectionalLight3D
-@export var world_environment: WorldEnvironment
 @export var target_model: Node3D
-@export var rod_model: Node3D
-@export var ground_plane: Node3D
-
 
 @export_category("Position Offsets")
 
@@ -25,12 +21,17 @@ extends Node3D
 		offset_y_pixels = value
 		_update_cached_offsets()
 
-
 @export_category("Mouse Tracking")
 
 # mouse tracking / rotation speed
 # eyeballing -- 20 seems to work ok, 10 too slow for me
 @export var rotation_speed: float = 60.0
+# ********* todo for future me --- build a jumping option for leap slammers
+# though I expect that variable atk spd and hang time would be a pain to implement accurately
+
+# angle offset not used yet, but keeping in for future functionality
+# thinking the offset could eventually be used for charged dash or cyclone type move skills
+# would be funny to have the model spin around while the char is cycloning
 @export_range(-180.0, 180.0) var angle_offset_degrees: float = 0.0
 
 
@@ -43,23 +44,6 @@ extends Node3D
 @export var wave_speed: float = 2.5
 @export var wave_height: float = 0.04
 @export var wave_rocking: float = 3.0
-
-# area presets
-@export_category("Presets")
-
-@export var active_preset: AreaPreset:
-	set(value):
-		if active_preset and active_preset.changed.is_connected(_on_preset_changed):
-			active_preset.changed.disconnect(_on_preset_changed)
-
-		active_preset = value
-
-		if active_preset:
-			if not active_preset.changed.is_connected(_on_preset_changed):
-				active_preset.changed.connect(_on_preset_changed)
-
-		if is_node_ready() and active_preset:
-			_apply_preset(active_preset)
 
 var time_passed: float = 0.0
 var base_position: Vector3 = Vector3.ZERO
@@ -81,7 +65,6 @@ func _ready() -> void:
 	Engine.max_fps = 60
 
 	var win = get_window()
-
 	win.transparent = true
 	win.always_on_top = true
 	get_viewport().transparent_bg = true
@@ -106,16 +89,6 @@ func _ready() -> void:
 			true
 		)
 
-	# apply starting preset if assigned in inspector
-	# should probably always be karui shores
-	# not advisable to do campaign with this overlay anyway,
-	# as I don't plan on making presets for campaign areas
-	if active_preset:
-		if not active_preset.changed.is_connected(_on_preset_changed):
-			active_preset.changed.connect(_on_preset_changed)
-
-		_apply_preset(active_preset)
-
 # pause processing gracefully if minimized with Win+D
 # Win+D makes it behave oddly sometimes
 func _notification(notification_code: int) -> void:
@@ -125,10 +98,6 @@ func _notification(notification_code: int) -> void:
 	elif notification_code == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_MINIMIZED:
 			is_app_minimized = true
-
-func _on_preset_changed() -> void:
-	if active_preset:
-		_apply_preset(active_preset)
 
 func _on_viewport_size_changed() -> void:
 	_update_cached_offsets()
@@ -158,78 +127,12 @@ func _update_cached_offsets() -> void:
 	else:
 		world_pixel_offset = Vector3.ZERO
 
-func _apply_preset(preset: AreaPreset) -> void:
-	if not preset:
-		return
-
-	# camera settings
-	if camera:
-		camera.position = preset.camera_position
-		camera.rotation_degrees = preset.camera_rotation_degrees
-		camera.fov = preset.camera_fov
-
-	# directional light settings
-	if directional_light:
-		directional_light.rotation_degrees = preset.light_rotation_degrees
-		directional_light.light_color = preset.light_color
-		directional_light.light_energy = preset.light_energy
-		directional_light.shadow_enabled = preset.shadow_enabled
-		directional_light.shadow_blur = preset.shadow_blur
-
-	# model ambient lighting
-	if world_environment and world_environment.environment:
-		var env = world_environment.environment
-
-		env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-		env.ambient_light_color = preset.ambient_color
-
-		var effective_ambient_energy = (
-			preset.ambient_energy * (1.0 - preset.shadow_opacity)
-		)
-
-		env.ambient_light_energy = maxf(0.0, effective_ambient_energy)
-
-	# ground plane shadow tinting & opacity
-	var target_node: Node3D = ground_plane
-
-	if not is_instance_valid(target_node):
-		target_node = find_child("Plane", true, false) as Node3D
-
-	if is_instance_valid(target_node):
-		var mesh_inst: MeshInstance3D = null
-
-		if target_node is MeshInstance3D:
-			mesh_inst = target_node as MeshInstance3D
-		else:
-			for child in target_node.get_children():
-				if child is MeshInstance3D:
-					mesh_inst = child
-					break
-
-		if is_instance_valid(mesh_inst):
-			var mat = mesh_inst.material_override
-
-			if not mat:
-				mat = mesh_inst.get_active_material(0)
-
-			if mat is ShaderMaterial:
-				var shadow_rgb = Vector3(
-					preset.shadow_tint.r,
-					preset.shadow_tint.g,
-					preset.shadow_tint.b
-				)
-
-				mat.set_shader_parameter("shadow_color", shadow_rgb)
-				mat.set_shader_parameter("shadow_opacity", preset.shadow_opacity)
-
-	# recalc pixel offset math since camera fov or distance might have changed
-	_update_cached_offsets()
-
 func _process(delta: float) -> void:
 	# skip all processing if window is minimized
 	if is_app_minimized:
 		return
 
+	# apparently this isn't good practice but this part at least works
 	if not target_model:
 		if get_child_count() > 3:
 			target_model = get_child(3) as Node3D
@@ -252,7 +155,6 @@ func _process(delta: float) -> void:
 
 	# run heavy raycast math only if the mouse moved from last pos
 	var global_mouse = DisplayServer.mouse_get_position()
-
 	if global_mouse != last_mouse_pos:
 		last_mouse_pos = global_mouse
 
@@ -306,8 +208,8 @@ func _process(delta: float) -> void:
 	target_model.rotation.z = wave_roll
 
 
+# the settings_manager has to toggle this whenever the settings window is open to allow interaction with it
 func set_click_through(enabled: bool) -> void:
-	# the tray_manager has to toggle this whenever the settings window is open to allow interaction with it
 	var window_id := get_window().get_window_id()
 	if enabled:
 		WinSetFlags.win_set_flag(

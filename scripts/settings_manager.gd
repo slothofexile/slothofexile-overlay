@@ -13,6 +13,13 @@ var rotation_speed_spinbox: SpinBox
 var max_fps_spinbox: SpinBox
 var wave_motion_checkbox: CheckBox
 
+var log_mode_option: OptionButton
+var log_path_edit: LineEdit
+
+# Baseline state tracking strictly for settings that require a full restart (log path)
+var loaded_log_mode: int = 0
+var loaded_log_path: String = ""
+
 # would really like to have persistent settings (locally) AND just a standalone exe but having both # aren't possible
 # this is the least obtrusive way to get persistent settings saved locally
 const CONFIG_PATH: String = "user://overlay_settings.ini"
@@ -31,6 +38,11 @@ const DEFAULT_ROTATION_SPEED: float = 20.0
 
 const DEFAULT_MAX_FPS: float = 60.0
 const DEFAULT_WAVE_MOTION: bool = true
+
+# Client.txt Paths
+const DEFAULT_LOG_PATH_STANDALONE: String = "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt"
+const DEFAULT_LOG_PATH_STEAM: String = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Path of Exile\\logs\\Client.txt"
+const DEFAULT_LOG_MODE: int = 0
 
 func _ready() -> void:
 	_setup_tray()
@@ -61,7 +73,7 @@ func _assign_tray_menu() -> void:
 func _setup_settings_window() -> void:
 	settings_window = Window.new()
 	settings_window.title = "Settings"
-	settings_window.size = Vector2i(380, 320)
+	settings_window.size = Vector2i(380, 440)
 	settings_window.unresizable = true
 	settings_window.borderless = true
 	settings_window.transient = true
@@ -138,9 +150,6 @@ func _setup_settings_window() -> void:
 	vbox.add_child(hbox_y)
 	
 	# mouse tracking / rotation speed (10 to 60)
-	# if you put this down to something low like 10, it'll look a bit like car drifting
-	# depending on how fast your move skill is and how long the move animation is
-	# like shield charge and whirling blades work ok
 	var hbox_rot = HBoxContainer.new()
 	var label_rot = Label.new()
 	label_rot.text = "Rotation Speed (10 to 60). Default 20:"
@@ -153,11 +162,8 @@ func _setup_settings_window() -> void:
 	hbox_rot.add_child(label_rot)
 	hbox_rot.add_child(rotation_speed_spinbox)
 	vbox.add_child(hbox_rot)
-	# ********* todo for future me --- build a jumping option for leap slammers
-	
 	
 	# max FPS
-	# there's probably some desync issues lurking around when fps approaching/exceeding monitor refresh
 	var hbox_fps = HBoxContainer.new()
 	var label_fps = Label.new()
 	label_fps.text = "Max FPS (10 to 60). Default 60:"
@@ -176,6 +182,52 @@ func _setup_settings_window() -> void:
 	wave_motion_checkbox.text = "Wave Motion"
 	wave_motion_checkbox.button_pressed = DEFAULT_WAVE_MOTION
 	vbox.add_child(wave_motion_checkbox)
+	
+	vbox.add_child(HSeparator.new())
+	
+	var log_header = Label.new()
+	log_header.text = "Client.txt Log Path:"
+	vbox.add_child(log_header)
+	
+	var log_mode_hbox = HBoxContainer.new()
+	var log_mode_label = Label.new()
+	log_mode_label.text = "  Preset:"
+	log_mode_label.custom_minimum_size.x = 80
+	
+	log_mode_option = OptionButton.new()
+	log_mode_option.add_item("Standalone", 0)
+	log_mode_option.add_item("Steam", 1)
+	log_mode_option.add_item("Custom", 2)
+	log_mode_option.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	log_mode_option.item_selected.connect(_on_log_mode_selected)
+	
+	log_mode_hbox.add_child(log_mode_label)
+	log_mode_hbox.add_child(log_mode_option)
+	vbox.add_child(log_mode_hbox)
+	
+	var log_path_hbox = HBoxContainer.new()
+	var log_path_label = Label.new()
+	log_path_label.text = "  Path:"
+	log_path_label.custom_minimum_size.x = 80
+	
+	log_path_edit = LineEdit.new()
+	log_path_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	log_path_edit.tooltip_text = log_path_edit.text
+	log_path_edit.text_changed.connect(func(text): log_path_edit.tooltip_text = text)
+	
+	log_path_hbox.add_child(log_path_label)
+	log_path_hbox.add_child(log_path_edit)
+	vbox.add_child(log_path_hbox)
+	
+	var restart_notice_label = Label.new()
+	restart_notice_label.text = "  *changes will restart overlay"
+	restart_notice_label.add_theme_font_size_override("font_size", 11)
+	restart_notice_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7, 0.9))
+	vbox.add_child(restart_notice_label)
+	
+	var spacer = Control.new()
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vbox.add_child(spacer)
 	
 	# buttons UI
 	var btn_hbox = HBoxContainer.new()
@@ -230,9 +282,34 @@ func _on_wave_motion_toggled(val: bool) -> void:
 	if is_instance_valid(overlay_main) and "enable_wave_motion" in overlay_main:
 		overlay_main.enable_wave_motion = val
 
+func _on_log_mode_selected(index: int) -> void:
+	if index == 0:
+		log_path_edit.text = DEFAULT_LOG_PATH_STANDALONE
+		log_path_edit.editable = false
+	elif index == 1:
+		log_path_edit.text = DEFAULT_LOG_PATH_STEAM
+		log_path_edit.editable = false
+	elif index == 2:
+		log_path_edit.editable = true
+	
+	log_path_edit.tooltip_text = log_path_edit.text
+
 func _on_save_pressed() -> void:
+	var log_path_changed = (
+		log_mode_option.selected != loaded_log_mode or
+		log_path_edit.text != loaded_log_path
+	)
+	
 	_save_ini()
 	settings_window.hide()
+
+	# only restart if the log path actually changed, as all other variables can be dynamically set/reset
+	# easier to just restart than to build logic to handle log path changes dynamically
+	# especially since the path isn't a setting that should change frequently
+	if log_path_changed:
+		print("Log path changed. Restarting overlay...")
+		OS.create_process(OS.get_executable_path(), OS.get_cmdline_args())
+		get_tree().quit()
 
 func _on_cancel_pressed() -> void:
 	_load_ini()
@@ -244,6 +321,7 @@ func _set_signals_blocked(blocked: bool) -> void:
 	rotation_speed_spinbox.set_block_signals(blocked)
 	max_fps_spinbox.set_block_signals(blocked)
 	wave_motion_checkbox.set_block_signals(blocked)
+	log_mode_option.set_block_signals(blocked)
 
 func _sync_all_to_overlay() -> void:
 	if is_instance_valid(overlay_main):
@@ -258,6 +336,10 @@ func _sync_all_to_overlay() -> void:
 	
 	Engine.max_fps = int(max_fps_spinbox.value)
 
+func _update_loaded_state() -> void:
+	loaded_log_mode = log_mode_option.selected
+	loaded_log_path = log_path_edit.text
+
 func _load_ini() -> void:
 	var config = ConfigFile.new()
 	if config.load(CONFIG_PATH) == OK:
@@ -267,11 +349,28 @@ func _load_ini() -> void:
 		rotation_speed_spinbox.value = config.get_value("Settings", "rotation_speed", DEFAULT_ROTATION_SPEED)
 		max_fps_spinbox.value = config.get_value("Settings", "max_fps", DEFAULT_MAX_FPS)
 		wave_motion_checkbox.button_pressed = config.get_value("Settings", "wave_motion", DEFAULT_WAVE_MOTION)
+		
+		var saved_mode = config.get_value("Settings", "log_mode", DEFAULT_LOG_MODE)
+		log_mode_option.selected = saved_mode
+		
+		if saved_mode == 0:
+			log_path_edit.text = DEFAULT_LOG_PATH_STANDALONE
+			log_path_edit.editable = false
+		elif saved_mode == 1:
+			log_path_edit.text = DEFAULT_LOG_PATH_STEAM
+			log_path_edit.editable = false
+		else:
+			log_path_edit.text = config.get_value("Settings", "log_path_custom", "")
+			log_path_edit.editable = true
+			
+		log_path_edit.tooltip_text = log_path_edit.text
+		_update_loaded_state()
 		_set_signals_blocked(false)
 		
 		_sync_all_to_overlay()
 	else:
 		_reset_defaults()
+		_save_ini()
 
 func _save_ini() -> void:
 	var config = ConfigFile.new()
@@ -280,7 +379,13 @@ func _save_ini() -> void:
 	config.set_value("Settings", "rotation_speed", rotation_speed_spinbox.value)
 	config.set_value("Settings", "max_fps", max_fps_spinbox.value)
 	config.set_value("Settings", "wave_motion", wave_motion_checkbox.button_pressed)
+	
+	config.set_value("Settings", "log_mode", log_mode_option.selected)
+	if log_mode_option.selected == 2:
+		config.set_value("Settings", "log_path_custom", log_path_edit.text)
+		
 	config.save(CONFIG_PATH)
+	_update_loaded_state()
 
 func _reset_defaults() -> void:
 	_set_signals_blocked(true)
@@ -289,6 +394,14 @@ func _reset_defaults() -> void:
 	rotation_speed_spinbox.value = DEFAULT_ROTATION_SPEED
 	max_fps_spinbox.value = DEFAULT_MAX_FPS
 	wave_motion_checkbox.button_pressed = DEFAULT_WAVE_MOTION
+	
+	log_mode_option.selected = DEFAULT_LOG_MODE
+	log_path_edit.text = DEFAULT_LOG_PATH_STANDALONE
+	log_path_edit.editable = false
+	log_path_edit.tooltip_text = log_path_edit.text
 	_set_signals_blocked(false)
 	
 	_sync_all_to_overlay()
+
+func get_current_log_path() -> String:
+	return log_path_edit.text

@@ -1,14 +1,18 @@
 class_name AreaManager
 extends Node
 
+signal preset_changed(preset_name: String)
+
 @export_group("Global Settings")
 @export var window_pixel_offset: Vector2i = Vector2i.ZERO 
 
 @export_group("Area Settings")
+@export var overlay_main: Node3D
 @export var camera: Camera3D
 @export var directional_light: DirectionalLight3D
 @export var world_environment: WorldEnvironment
 @export var shadow_plane: GeometryInstance3D
+@export var log_reader: Node
 
 # drag/drop  .tres files into this array in the inspector
 @export var presets: Array[AreaPreset] = []
@@ -30,9 +34,18 @@ func _ready() -> void:
 			var preset_name = p.resource_path.get_file().get_basename()
 			preset_map[preset_name] = p
 
+	# connect log reader signal if assigned
+	if is_instance_valid(log_reader) and log_reader.has_signal("area_entered"):
+		log_reader.area_entered.connect(_on_area_entered)
+
 	# automatically apply default preset on start
 	if default_preset_name != "":
 		apply_preset(default_preset_name)
+
+func _on_area_entered(raw_area_name: String) -> void:
+	# convert log string like "Coastal Hideout" to preset key "coastal_hideout"
+	var formatted_key = raw_area_name.to_lower().replace(" ", "_")
+	apply_preset(formatted_key)
 
 func apply_preset(preset_name: String) -> void:
 	if not preset_map.has(preset_name):
@@ -60,10 +73,39 @@ func apply_preset(preset_name: String) -> void:
 		var env = world_environment.environment
 		env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 		env.ambient_light_color = data.ambient_color
-		env.ambient_light_energy = data.ambient_energy
+		
+		var effective_ambient_energy = (
+			data.ambient_energy * (1.0 - data.shadow_opacity)
+		)
+		env.ambient_light_energy = maxf(0.0, effective_ambient_energy)
 
 	# apply shadow opacity to the shader
-	if shadow_plane and shadow_plane.material_override != null:
-		var shader_mat = shadow_plane.material_override as ShaderMaterial
-		if shader_mat:
-			shader_mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
+	if is_instance_valid(shadow_plane):
+		var mesh_inst: MeshInstance3D = null
+
+		if shadow_plane is MeshInstance3D:
+			mesh_inst = shadow_plane as MeshInstance3D
+		else:
+			for child in shadow_plane.get_children():
+				if child is MeshInstance3D:
+					mesh_inst = child
+					break
+
+		if is_instance_valid(mesh_inst):
+			var mat = mesh_inst.material_override
+			if not mat:
+				mat = mesh_inst.get_active_material(0)
+
+			if mat is ShaderMaterial:
+				var shadow_rgb = Vector3(
+					data.shadow_tint.r,
+					data.shadow_tint.g,
+					data.shadow_tint.b
+				)
+				mat.set_shader_parameter("shadow_color", shadow_rgb)
+				mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
+
+	preset_changed.emit(preset_name)
+
+	if is_instance_valid(overlay_main) and overlay_main.has_method("_update_cached_offsets"):
+		overlay_main._update_cached_offsets()
