@@ -29,7 +29,7 @@ This is inspired partly by these **static** player/streamer overlays that go on 
   
 &emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
 
-This is also inspired by all these newer type of **animated/interactive** player/streamer overlays that react to something else -- like they also talk when the streamer talks/moves.
+This is also inspired by all these newer type of **animated/interactive** player/streamer overlays that react to something else. Those overlays can talk or move (!) when the streamer also talks/moves.
 
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/32b03cb6-440f-49cc-9bd6-37a495de3246" />
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/64b0fb5e-d006-469f-8ae7-318d3479ddb6" />
