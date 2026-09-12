@@ -78,7 +78,7 @@ Lots! _But probably not where and how you think it's been used._
 
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
 
-AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a specific platform/environment. Like how Godot implements something like shadows or handles lighting, etc.... Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
+AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a particular platform/environment. Like how Godot implements something like shadows or handles lighting, etc.... Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
 
 Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working.
 
