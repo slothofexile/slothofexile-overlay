@@ -8,7 +8,8 @@
 [ext_resource type="Script" uid="uid://bt2ltompsmaxf" path="res://scripts/area_manager.gd" id="6_5vw27"]
 [ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="7_kek77"]
 [ext_resource type="Resource" uid="uid://b7xvcs4kfsecb" path="res://data/presets/coastal_hideout.tres" id="8_4c57u"]
-[ext_resource type="Script" uid="uid://826mph7oo61y" path="res://scripts/tray_manager.gd" id="9_85g3d"]
+[ext_resource type="Script" uid="uid://826mph7oo61y" path="res://scripts/settings_manager.gd" id="9_85g3d"]
+[ext_resource type="Script" uid="uid://b1rhnval0cixl" path="res://scripts/log_reader.gd" id="10_choun"]
 
 [sub_resource type="Environment" id="Environment_cmnmv"]
 ambient_light_source = 2
@@ -73,15 +74,19 @@ surface_material_override/0 = SubResource("StandardMaterial3D_tipki")
 autoplay = &"flag|Action"
 speed_scale = 0.25
 
-[node name="AreaManager" type="Node" parent="." unique_id=1203549999 node_paths=PackedStringArray("camera", "directional_light", "world_environment", "shadow_plane")]
+[node name="AreaManager" type="Node" parent="." unique_id=1203549999 node_paths=PackedStringArray("camera", "directional_light", "world_environment", "shadow_plane", "log_reader")]
 script = ExtResource("6_5vw27")
 camera = NodePath("../Camera3D")
 directional_light = NodePath("../DirectionalLight3D")
 world_environment = NodePath("../WorldEnvironment")
 shadow_plane = NodePath("../cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
+log_reader = NodePath("../LogReader")
 presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u")])
 
-[node name="TrayManager" type="Node" parent="." unique_id=1250105236]
+[node name="SettingsManager" type="Node" parent="." unique_id=1250105236]
 script = ExtResource("9_85g3d")
+
+[node name="LogReader" type="Node" parent="." unique_id=290495636]
+script = ExtResource("10_choun")
 
 [editable path="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2"]
