@@ -84,7 +84,7 @@ Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help 
 
 It was with these things that would have taken forever to learn, that _was not_ coding, where AI was 120% helpful. 
 
-Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything (if that's even possible). Even with the smallest free-tier quota, I've never gone beyond single-digit % usage limits. (Don't tell Google or they'll cut back even more.)
+Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything (if that's even possible). Even with the smallest free-tier quota, I've never gone beyond single-digit % weekly usage limits. 
 
 <img width="430" height="140" alt="image" src="https://github.com/user-attachments/assets/5481a257-4a98-4f05-9783-dd89d1f3bdd1" />
 
