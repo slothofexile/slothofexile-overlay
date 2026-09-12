@@ -59,7 +59,7 @@ Only you and your audience can see the overlay. It doesn't mess with any other p
 
 **Warning, here be dragons.**
 
-It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far). I don't think it's good enough yet and I have so much to do -- area timer, client.txt parsing, area presets, etc... This is also my first time using Github. 
+It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far). This is also my first time using Github. 
 
 Just check out this mess of 3d asset imports into Godot. All I know for now is that it works, so I don't dare clean it up and have something break.
 
