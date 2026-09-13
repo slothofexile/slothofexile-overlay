@@ -86,7 +86,8 @@ It was with these things that would have taken forever to learn, that _was not_ 
 
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything (if that's even possible). With how I use AI, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
 
-<img width="450" height="252" alt="image" src="https://github.com/user-attachments/assets/4685f64d-acab-4914-b631-392837c4f6dd" />
+<img width="470" height="181" alt="image" src="https://github.com/user-attachments/assets/7152eb62-7e3a-4ce8-bfae-957bf1193a9b" />
+
 
 
 
