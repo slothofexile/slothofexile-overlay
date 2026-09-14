@@ -57,6 +57,8 @@ var target_yaw: float = 0.0
 
 var is_app_minimized: bool = false
 
+@onready var settings_manager: Node = $SettingsManager
+
 func _ready() -> void:
 	# DWM stutter (desync?) if PoE and overlay both at vsync for some reason,
 	# cap at 60 FPS fixes it(?)
@@ -88,6 +90,23 @@ func _ready() -> void:
 			WinSetFlags.WS_EX_TRANSPARENT,
 			true
 		)
+
+	# connecting SettingsManager signal to update runtime parameters dynamically
+	if is_instance_valid(settings_manager):
+		settings_manager.settings_changed.connect(_on_settings_changed)
+		_on_settings_changed()
+
+func _on_settings_changed() -> void:
+	if not is_instance_valid(settings_manager):
+		return
+		
+	# Apply cached settings manager properties directly to export variables
+	offset_x_pixels = settings_manager.offset_x
+	offset_y_pixels = settings_manager.offset_y
+	rotation_speed = settings_manager.rotation_speed
+	enable_wave_motion = settings_manager.wave_motion
+	
+	_update_cached_offsets()
 
 # pause processing gracefully if minimized with Win+D
 # Win+D makes it behave oddly sometimes
@@ -210,6 +229,9 @@ func _process(delta: float) -> void:
 
 # the settings_manager has to toggle this whenever the settings window is open to allow interaction with it
 func set_click_through(enabled: bool) -> void:
+	if not Engine.has_singleton("WinSetFlags"):
+		return
+		
 	var window_id := get_window().get_window_id()
 	if enabled:
 		WinSetFlags.win_set_flag(
@@ -217,9 +239,14 @@ func set_click_through(enabled: bool) -> void:
 			WinSetFlags.WS_EX_LAYERED,
 			true
 		)
+		WinSetFlags.win_set_flag(
+			window_id,
+			WinSetFlags.WS_EX_TRANSPARENT,
+			true
+		)
 	else:
 		WinSetFlags.win_set_flag(
 			window_id,
-			WinSetFlags.WS_EX_LAYERED,
+			WinSetFlags.WS_EX_TRANSPARENT,
 			false
 		)
