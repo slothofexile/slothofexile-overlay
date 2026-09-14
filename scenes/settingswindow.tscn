@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://d3olhgcmj1xia"]
+
+[ext_resource type="Script" uid="uid://bsd51ut6n4jxa" path="res://scripts/settings_window.gd" id="1_ny2w0"]
+
+[node name="SettingsWindow" type="Window" unique_id=742842037]
+oversampling_override = 1.0
+title = "Settings"
+size = Vector2i(380, 440)
+visible = false
+transient = true
+unresizable = true
+borderless = true
+script = ExtResource("1_ny2w0")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1282759571]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=635426345]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=623506209]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Overlay Settings"
+
+[node name="OffsetHeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1816317796]
+layout_mode = 2
+text = "Display Offset (-512 to +512 px):"
+
+[node name="HBoxX" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1893310649]
+layout_mode = 2
+
+[node name="LabelX" type="Label" parent="MarginContainer/VBoxContainer/HBoxX" unique_id=1444572668]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "X pixels:"
+
+[node name="OffsetXSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxX" unique_id=1630400776]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+min_value = -512.0
+max_value = 512.0
+
+[node name="HBoxY" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1464333151]
+layout_mode = 2
+
+[node name="LabelY" type="Label" parent="MarginContainer/VBoxContainer/HBoxY" unique_id=1247863241]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "Y pixels:"
+
+[node name="OffsetYSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxY" unique_id=1697031142]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+min_value = -512.0
+max_value = 512.0
+
+[node name="HBoxRotation" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=918025494]
+layout_mode = 2
+
+[node name="LabelRotation" type="Label" parent="MarginContainer/VBoxContainer/HBoxRotation" unique_id=1349208277]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "Rotation Speed (10 to 60). Default 20:"
+
+[node name="RotationSpeedSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxRotation" unique_id=2042915226]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+
+[node name="HBoxFPS" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=942862146]
+layout_mode = 2
+
+[node name="LabelFPS" type="Label" parent="MarginContainer/VBoxContainer/HBoxFPS" unique_id=364792682]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "Max FPS (10 to 60). Default 60:"
+
+[node name="MaxFPSSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxFPS" unique_id=1580379139]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+min_value = 10.0
+max_value = 60.0
+value = 10.0
+
+[node name="WaveMotionCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer" unique_id=1651034687]
+layout_mode = 2
+text = "Enable Wave Motion"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1548505929]
+layout_mode = 2
+
+[node name="LogHeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=875983645]
+layout_mode = 2
+text = "Client.txt Log Path:"
+
+[node name="HBoxLogMode" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1205810840]
+layout_mode = 2
+
+[node name="LabelLogMode" type="Label" parent="MarginContainer/VBoxContainer/HBoxLogMode" unique_id=2118006652]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Preset:"
+
+[node name="LogModeOption" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxLogMode" unique_id=1992182814]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Standalone"
+popup/item_0/id = 0
+popup/item_1/text = "Steam"
+popup/item_1/id = 1
+popup/item_2/text = "Custom"
+popup/item_2/id = 2
+
+[node name="HBoxLogPath" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1261659506]
+layout_mode = 2
+
+[node name="LabelLogPath" type="Label" parent="MarginContainer/VBoxContainer/HBoxLogPath" unique_id=1475440818]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Path:"
+
+[node name="LogPathEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxLogPath" unique_id=1559341562]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RestartNoticeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1408379281]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85430586, 0.85430586, 0.85430586, 0.90000004)
+theme_override_font_sizes/font_size = 11
+text = "*changes will restart overlay"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=948848113]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=106126294]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxButtons" unique_id=1618074147]
+layout_mode = 2
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxButtons" unique_id=1719996437]
+layout_mode = 2
+text = "Cancel"
+
+[node name="ResetButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxButtons" unique_id=1713563186]
+layout_mode = 2
+text = "Reset to Default"
