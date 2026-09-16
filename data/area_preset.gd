@@ -4,7 +4,6 @@ extends Resource
 @export_group("Camera")
 @export var camera_position: Vector3 = Vector3(0.0, 7.0, 5.5)
 @export var camera_rotation_degrees: Vector3 = Vector3(-52.0, 0.0, 0.0)
-@export var camera_fov: float = 40.0
 
 @export_group("Lighting")
 @export var light_rotation_degrees: Vector3 = Vector3(-32.0, -135.0, 0.0)
