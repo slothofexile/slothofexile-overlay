@@ -5,7 +5,7 @@
 [node name="SettingsWindow" type="Window" unique_id=742842037]
 oversampling_override = 1.0
 title = "Settings"
-size = Vector2i(380, 440)
+size = Vector2i(380, 460)
 visible = false
 transient = true
 unresizable = true
@@ -74,7 +74,22 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 min_value = 10.0
 max_value = 60.0
-value = 10.0
+value = 20.0
+
+[node name="HBoxCameraZoom" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=235502810]
+layout_mode = 2
+
+[node name="LabelCameraZoom" type="Label" parent="MarginContainer/VBoxContainer/HBoxCameraZoom" unique_id=275769249]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "Camera Zoom (70 to 110). Default 90:"
+
+[node name="CameraZoomSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxCameraZoom" unique_id=343383068]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+min_value = 70.0
+max_value = 110.0
+value = 90.0
 
 [node name="HBoxFPS" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=942862146]
 layout_mode = 2
@@ -137,7 +152,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85430586, 0.85430586, 0.85430586, 0.90000004)
 theme_override_font_sizes/font_size = 11
-text = "*changes will restart overlay"
+text = "*path changes will need overlay restart"
 
 [node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=948848113]
 layout_mode = 2
