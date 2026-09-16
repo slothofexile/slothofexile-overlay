@@ -9,7 +9,7 @@ signal settings_changed
 var tray_menu: PopupMenu
 var tray_icon: StatusIndicator
 
-# Reference to the instantiated SettingsWindow scene
+# reference to the instantiated SettingsWindow scene
 const SETTINGS_WINDOW_SCENE = preload("res://scenes/settingswindow.tscn")
 var settings_window: Window
 
@@ -28,7 +28,7 @@ const DEFAULT_OFFSET_X: float = 0.0
 
 # on my 1920x1080, -75 Y offset looks ok with a hiero char
 # will probably need to change it to a function of screensize for other resolutions
-# and/or for smaller chars like... the ranger?
+# and/or for smaller chars like... the ranger? IDK, I don't play rangers.
 const DEFAULT_OFFSET_Y: float = -75.0
 
 # mouse tracking/rotation speed
@@ -37,6 +37,10 @@ const DEFAULT_ROTATION_SPEED: float = 20.0
 
 const DEFAULT_MAX_FPS: float = 60.0
 const DEFAULT_WAVE_MOTION: bool = true
+
+# 90 looks ok on my 1920 x 1080 reso on top of a hiero
+# higher or lower resolutions (or diff size chars) might need adjustment
+const DEFAULT_CAMERA_ZOOM: float = 90.0
 
 # Client.txt defined paths
 const DEFAULT_LOG_PATH_STANDALONE: String = "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs\\Client.txt"
@@ -49,6 +53,7 @@ var offset_y: float = DEFAULT_OFFSET_Y
 var rotation_speed: float = DEFAULT_ROTATION_SPEED
 var max_fps: float = DEFAULT_MAX_FPS
 var wave_motion: bool = DEFAULT_WAVE_MOTION
+var camera_zoom: float = DEFAULT_CAMERA_ZOOM
 var log_mode: int = DEFAULT_LOG_MODE
 var log_path_custom: String = ""
 
@@ -69,7 +74,6 @@ func _setup_tray() -> void:
 	tray_icon = StatusIndicator.new()
 	tray_icon.name = "StatusIndicator"
 	tray_icon.tooltip = "Overlay Settings"
-	# Ensure icon.svg (or your target icon file) exists in your res:// root
 	tray_icon.icon = preload("res://icon.svg") 
 	add_child(tray_icon)
 	
@@ -82,13 +86,13 @@ func _assign_tray_menu() -> void:
 func _setup_settings_window() -> void:
 	settings_window = SETTINGS_WINDOW_SCENE.instantiate()
 	
-	# Disable window click-through while editing settings
+	# disable window click-through while editing settings
 	settings_window.about_to_popup.connect(func():
 		if is_instance_valid(overlay_main) and overlay_main.has_method("set_click_through"):
 			overlay_main.set_click_through(false)
 	)
 	
-	# Re-enable window click-through when closing settings
+	# re-enable window click-through when closing settings
 	settings_window.visibility_changed.connect(func():
 		if not settings_window.visible:
 			if is_instance_valid(overlay_main) and overlay_main.has_method("set_click_through"):
@@ -107,6 +111,7 @@ func _on_tray_menu_pressed(id: int) -> void:
 				"rotation_speed": rotation_speed,
 				"max_fps": max_fps,
 				"wave_motion": wave_motion,
+				"camera_zoom": camera_zoom,
 				"log_mode": log_mode,
 				"log_path": get_current_log_path()
 			}
@@ -134,6 +139,7 @@ func load_ini() -> void:
 		rotation_speed = config.get_value("Settings", "rotation_speed", DEFAULT_ROTATION_SPEED)
 		max_fps = config.get_value("Settings", "max_fps", DEFAULT_MAX_FPS)
 		wave_motion = config.get_value("Settings", "wave_motion", DEFAULT_WAVE_MOTION)
+		camera_zoom = config.get_value("Settings", "camera_zoom", DEFAULT_CAMERA_ZOOM)
 		
 		var saved_mode = config.get_value("Settings", "log_mode", DEFAULT_LOG_MODE)
 		log_mode = saved_mode
@@ -153,6 +159,7 @@ func save_ini() -> void:
 	config.set_value("Settings", "rotation_speed", rotation_speed)
 	config.set_value("Settings", "max_fps", max_fps)
 	config.set_value("Settings", "wave_motion", wave_motion)
+	config.set_value("Settings", "camera_zoom", camera_zoom)
 	config.set_value("Settings", "log_mode", log_mode)
 	if log_mode == 2:
 		config.set_value("Settings", "log_path_custom", log_path_custom)
@@ -182,6 +189,7 @@ func reset_to_defaults() -> void:
 	rotation_speed = DEFAULT_ROTATION_SPEED
 	max_fps = DEFAULT_MAX_FPS
 	wave_motion = DEFAULT_WAVE_MOTION
+	camera_zoom = DEFAULT_CAMERA_ZOOM
 	log_mode = DEFAULT_LOG_MODE
 	log_path_custom = ""
 	
@@ -195,7 +203,7 @@ func _update_loaded_state() -> void:
 	loaded_log_mode = log_mode
 	loaded_log_path = get_current_log_path()
 
-# Bindings for SettingsWindow signals
+# bindings for settings_window signals
 func connect_settings_window(window: Window) -> void:
 	if not is_instance_valid(window):
 		return
@@ -203,7 +211,8 @@ func connect_settings_window(window: Window) -> void:
 	window.save_requested.connect(_on_window_save_requested)
 	window.preview_changed.connect(_on_window_preview_changed)
 	window.reset_requested.connect(func(): _on_window_reset_requested(window))
-	window.cancel_requested.connect(load_ini) # Reload from INI to undo real-time preview changes
+	# reload from INI to undo real-time preview changes
+	window.cancel_requested.connect(load_ini) 
 
 func _on_window_save_requested(new_settings: Dictionary, _log_changed: bool) -> void:
 	offset_x = new_settings.get("offset_x", DEFAULT_OFFSET_X)
@@ -211,6 +220,7 @@ func _on_window_save_requested(new_settings: Dictionary, _log_changed: bool) -> 
 	rotation_speed = new_settings.get("rotation_speed", DEFAULT_ROTATION_SPEED)
 	max_fps = new_settings.get("max_fps", DEFAULT_MAX_FPS)
 	wave_motion = new_settings.get("wave_motion", DEFAULT_WAVE_MOTION)
+	camera_zoom = new_settings.get("camera_zoom", DEFAULT_CAMERA_ZOOM)
 	log_mode = new_settings.get("log_mode", DEFAULT_LOG_MODE)
 	
 	if log_mode == 2:
@@ -227,6 +237,7 @@ func _on_window_preview_changed(key: String, value: Variant) -> void:
 			max_fps = value
 			_apply_engine_settings()
 		"wave_motion": wave_motion = value
+		"camera_zoom": camera_zoom = value
 	settings_changed.emit()
 
 func _on_window_reset_requested(window: Window) -> void:
@@ -238,6 +249,7 @@ func _on_window_reset_requested(window: Window) -> void:
 			"rotation_speed": rotation_speed,
 			"max_fps": max_fps,
 			"wave_motion": wave_motion,
+			"camera_zoom": camera_zoom,
 			"log_mode": log_mode,
 			"log_path": get_current_log_path()
 		}

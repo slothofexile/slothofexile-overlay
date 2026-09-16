@@ -11,6 +11,7 @@ signal cancel_requested()
 @onready var rotation_speed_spinbox: SpinBox = $MarginContainer/VBoxContainer/HBoxRotation/RotationSpeedSpinBox
 @onready var max_fps_spinbox: SpinBox = $MarginContainer/VBoxContainer/HBoxFPS/MaxFPSSpinBox
 @onready var wave_motion_checkbox: CheckBox = $MarginContainer/VBoxContainer/WaveMotionCheckBox
+@onready var camera_zoom_spinbox: SpinBox = $MarginContainer/VBoxContainer/HBoxCameraZoom/CameraZoomSpinBox
 @onready var log_mode_option: OptionButton = $MarginContainer/VBoxContainer/HBoxLogMode/LogModeOption
 @onready var log_path_edit: LineEdit = $MarginContainer/VBoxContainer/HBoxLogPath/LogPathEdit
 
@@ -39,12 +40,13 @@ func _ready() -> void:
 	log_mode_option.item_selected.connect(_on_log_mode_selected)
 	log_path_edit.text_changed.connect(func(t): log_path_edit.tooltip_text = t)
 
-	# dynamic connections
+	# connections for dynamic updates
 	offset_x_spinbox.value_changed.connect(func(v): preview_changed.emit("offset_x", v))
 	offset_y_spinbox.value_changed.connect(func(v): preview_changed.emit("offset_y", v))
 	rotation_speed_spinbox.value_changed.connect(func(v): preview_changed.emit("rotation_speed", v))
 	max_fps_spinbox.value_changed.connect(func(v): preview_changed.emit("max_fps", v))
 	wave_motion_checkbox.toggled.connect(func(v): preview_changed.emit("wave_motion", v))
+	camera_zoom_spinbox.value_changed.connect(func(v): preview_changed.emit("camera_zoom", v))
 
 func populate_ui(data: Dictionary) -> void:
 	_set_signals_blocked(true)
@@ -53,6 +55,7 @@ func populate_ui(data: Dictionary) -> void:
 	rotation_speed_spinbox.value = data.get("rotation_speed", 20.0)
 	max_fps_spinbox.value = data.get("max_fps", 60.0)
 	wave_motion_checkbox.button_pressed = data.get("wave_motion", true)
+	camera_zoom_spinbox.value = data.get("camera_zoom", 90.0)
 	
 	loaded_log_mode = data.get("log_mode", 0)
 	loaded_log_path = data.get("log_path", DEFAULT_LOG_PATH_STANDALONE)
@@ -82,6 +85,7 @@ func _on_save_pressed() -> void:
 		"rotation_speed": rotation_speed_spinbox.value,
 		"max_fps": max_fps_spinbox.value,
 		"wave_motion": wave_motion_checkbox.button_pressed,
+		"camera_zoom": camera_zoom_spinbox.value,
 		"log_mode": log_mode_option.selected,
 		"log_path": log_path_edit.text
 	}
@@ -101,4 +105,5 @@ func _set_signals_blocked(blocked: bool) -> void:
 	rotation_speed_spinbox.set_block_signals(blocked)
 	max_fps_spinbox.set_block_signals(blocked)
 	wave_motion_checkbox.set_block_signals(blocked)
+	camera_zoom_spinbox.set_block_signals(blocked)
 	log_mode_option.set_block_signals(blocked)

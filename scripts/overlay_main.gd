@@ -21,6 +21,18 @@ extends Node3D
 		offset_y_pixels = value
 		_update_cached_offsets()
 
+
+# apparently there are better ways to implement model size adjustments in Godot
+# but using camera FOV is the simplest/quickest way to implement quasi-size adjustment 
+# originally managed by overlay_main, I later moved it to the .tres resource files
+# and now I moved it again to the settings_manager, updating overlay_main
+@export_category("Camera Zoom")
+
+# 90 looks decent on 1920 x 1080
+# kept limits to 90 + or - 20 to limit distortion at extreme values (0 and 180)
+@export var camera_zoom: float = 90
+
+
 @export_category("Mouse Tracking")
 
 # mouse tracking / rotation speed
@@ -44,6 +56,7 @@ extends Node3D
 @export var wave_speed: float = 2.5
 @export var wave_height: float = 0.04
 @export var wave_rocking: float = 3.0
+
 
 var time_passed: float = 0.0
 var base_position: Vector3 = Vector3.ZERO
@@ -100,12 +113,15 @@ func _on_settings_changed() -> void:
 	if not is_instance_valid(settings_manager):
 		return
 		
-	# Apply cached settings manager properties directly to export variables
+	# apply cached settings manager properties directly to export variables
 	offset_x_pixels = settings_manager.offset_x
 	offset_y_pixels = settings_manager.offset_y
 	rotation_speed = settings_manager.rotation_speed
 	enable_wave_motion = settings_manager.wave_motion
 	
+	
+	camera_zoom = settings_manager.camera_zoom
+	$Camera3D.fov = camera_zoom
 	_update_cached_offsets()
 
 # pause processing gracefully if minimized with Win+D
@@ -151,7 +167,8 @@ func _process(delta: float) -> void:
 	if is_app_minimized:
 		return
 
-	# apparently this isn't good practice but this part at least works
+	# apparently this isn't good practice, as the hardcoded reference can break 
+	# but this part at least works for now
 	if not target_model:
 		if get_child_count() > 3:
 			target_model = get_child(3) as Node3D
@@ -234,11 +251,6 @@ func set_click_through(enabled: bool) -> void:
 		
 	var window_id := get_window().get_window_id()
 	if enabled:
-		WinSetFlags.win_set_flag(
-			window_id,
-			WinSetFlags.WS_EX_LAYERED,
-			true
-		)
 		WinSetFlags.win_set_flag(
 			window_id,
 			WinSetFlags.WS_EX_TRANSPARENT,

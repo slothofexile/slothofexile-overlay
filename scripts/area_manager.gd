@@ -14,7 +14,7 @@ signal preset_changed(preset_name: String)
 @export var shadow_plane: GeometryInstance3D
 @export var log_reader: Node
 
-# drag/drop  .tres files into this array in the inspector
+# drag/drop .tres files into this array in the inspector
 @export var presets: Array[AreaPreset] = []
 
 # preset to apply automatically when the scene loads
@@ -43,7 +43,7 @@ func _ready() -> void:
 		apply_preset(default_preset_name)
 
 func _on_area_entered(raw_area_name: String) -> void:
-	# convert log string like "Coastal Hideout" to preset key "coastal_hideout"
+	# convert log string "Coastal Hideout" to preset key "coastal_hideout"
 	var formatted_key = raw_area_name.to_lower().replace(" ", "_")
 	apply_preset(formatted_key)
 
@@ -54,11 +54,11 @@ func apply_preset(preset_name: String) -> void:
 		
 	var data: AreaPreset = preset_map[preset_name]
 	
-	# apply camera
+	# apply camera position/rotation (FOV/Zoom handled globally by SettingsManager)
 	if camera:
 		camera.position = data.camera_position
 		camera.rotation_degrees = data.camera_rotation_degrees
-		camera.fov = data.camera_fov
+							  
 		
 	# apply lighting
 	if directional_light:
