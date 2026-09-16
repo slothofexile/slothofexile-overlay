@@ -13,3 +13,5 @@ You can download the individual assets yourself, but you'll have to make minor e
 -   "Pirate Flag animated" (https://skfb.ly/6TIuV) by SusanKing is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
   
 -   "Pirate hat" (https://skfb.ly/oK9AF) by Alessandro Zanetti is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+  ** The hardest parts were having to manually positioning/resizing the eyepatch, and angling and placing the pirate hat to look natural. All other positioning was forgiving.
