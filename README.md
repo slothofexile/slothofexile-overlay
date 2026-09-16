@@ -23,7 +23,7 @@ As of this writing (3.29 Allflame League on PoE1), the model I have on it is Che
 
 **Anyway, these things are neither new, nor unique to Path of Exile.**
 
-This is inspired partly by these **static** player/streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
+This was first inspired by these **static** player/streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
 
 &emsp;(This particular example is from 10 years ago [from reddit user Musti_A](https://www.reddit.com/r/pathofexile/comments/5x9pgt/i_made_some_poe_twitch_stream_overlays_free/).)
   
@@ -47,7 +47,7 @@ This is also inspired by all these newer type of **animated/interactive** player
 My overlay doesn't talk, but it does rotate in place. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent Godot "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
 
 
-The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this, like [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago), and newer ones like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
+The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this exact way of reading the logs, from [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago) to the latest tools like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
 
 Only you and your audience can see the overlay. It doesn't mess with any other players (which is more that I can say for some MTX out there, like that damned Goblin Band). 
 
@@ -76,7 +76,9 @@ Just check out this mess of 3d asset imports into Godot. All I know for now is t
 
 Lots! _But probably not where and how you think it's been used._
 
-If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. Same goes for log file parsing -- it's all just basic string manipulation.
+If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
+
+Same goes for log file parsing > it's all just basic string manipulation.
 
 AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a particular platform/environment. Like how Godot implements something like shadows or handles lighting, etc.... Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
 
