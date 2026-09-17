@@ -38,7 +38,7 @@ This is also inspired by all these newer type of **animated/interactive** player
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/54ecb7e1-e9df-406c-9bdf-9b10bbba9a9a" />
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/ca6e0ead-c3d5-4e1a-b537-5e75017cc4d7" />
 
-
+** I've been told that the player can't actually see these, but the audience does.
 
 
 <br>
