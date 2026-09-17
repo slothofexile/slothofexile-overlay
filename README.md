@@ -46,6 +46,9 @@ This is also inspired by all these newer type of **animated/interactive** player
   
 My overlay doesn't talk, but it does rotate in place. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent Godot "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
 
+<img width="381" height="188" alt="image" src="https://github.com/user-attachments/assets/5dce2dbc-7345-44c7-a4bd-d744bab35c57" />
+
+&nbsp;
 
 The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this exact way of reading the logs, from [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago) to the latest tools like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
 
