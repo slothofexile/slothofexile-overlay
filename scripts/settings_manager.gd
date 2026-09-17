@@ -140,10 +140,23 @@ func load_ini() -> void:
 		max_fps = config.get_value("Settings", "max_fps", DEFAULT_MAX_FPS)
 		wave_motion = config.get_value("Settings", "wave_motion", DEFAULT_WAVE_MOTION)
 		camera_zoom = config.get_value("Settings", "camera_zoom", DEFAULT_CAMERA_ZOOM)
-		
-		var saved_mode = config.get_value("Settings", "log_mode", DEFAULT_LOG_MODE)
-		log_mode = saved_mode
+		log_mode = config.get_value("Settings", "log_mode", DEFAULT_LOG_MODE)
 		log_path_custom = config.get_value("Settings", "log_path_custom", "")
+		
+		
+	# validate settings if reading from file
+	# to prevent insertion of values outside types and min/max already set in settings window
+	# simplest way to handle anything outside is to just trigger reset to default
+	if (
+			_is_setting_valid(offset_x, -128.0, 128.0) and
+			_is_setting_valid(offset_y, -128.0, 128.0) and
+			_is_setting_valid(rotation_speed, 10.0, 60.0) and
+			_is_setting_valid(max_fps, 10.0, 60.0) and
+			_is_setting_valid(camera_zoom, 10.0, 180.0) and
+			typeof(wave_motion) == TYPE_BOOL and
+			typeof(log_mode) == TYPE_INT and log_mode in [0, 1, 2] and
+			typeof(log_path_custom) == TYPE_STRING
+		):
 		
 		_update_loaded_state()
 		_apply_engine_settings()
@@ -151,6 +164,9 @@ func load_ini() -> void:
 	else:
 		reset_to_defaults()
 		save_ini()
+
+func _is_setting_valid(val: Variant, min_val: float, max_val: float) -> bool:
+	return (val is float or val is int) and val >= min_val and val <= max_val
 
 func save_ini() -> void:
 	var config = ConfigFile.new()
@@ -179,7 +195,7 @@ func save_ini() -> void:
 	settings_changed.emit()
 
 	if log_path_changed:
-		# print("Log path changed. Restarting overlay...")
+		#### print("Log path changed. Restarting overlay...")
 		OS.create_process(OS.get_executable_path(), OS.get_cmdline_args())
 		get_tree().quit()
 
@@ -203,7 +219,6 @@ func _update_loaded_state() -> void:
 	loaded_log_mode = log_mode
 	loaded_log_path = get_current_log_path()
 
-# bindings for settings_window signals
 func connect_settings_window(window: Window) -> void:
 	if not is_instance_valid(window):
 		return

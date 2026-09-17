@@ -121,7 +121,9 @@ func _on_settings_changed() -> void:
 	
 	
 	camera_zoom = settings_manager.camera_zoom
-	$Camera3D.fov = camera_zoom
+	if is_instance_valid(camera):
+		camera.fov = camera_zoom
+	
 	_update_cached_offsets()
 
 # pause processing gracefully if minimized with Win+D
