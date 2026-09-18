@@ -57,7 +57,6 @@ extends Node3D
 @export var wave_height: float = 0.04
 @export var wave_rocking: float = 3.0
 
-
 var time_passed: float = 0.0
 var base_position: Vector3 = Vector3.ZERO
 var is_setup: bool = false
@@ -88,31 +87,17 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 	# Windows window flags using our WinSetFlags GDExtension. 
-	# Godot can't natively set this unlike with the first version/s I wrote in AutoIT
+	# Godot can't natively set this -- unlike with the first version/s I wrote in AutoIT using DllCall
 	if Engine.has_singleton("WinSetFlags"):
 		var window_id := get_window().get_window_id()
-
-		WinSetFlags.win_set_flag(
-			window_id,
-			WinSetFlags.WS_EX_LAYERED,
-			true
-		)
-
-		WinSetFlags.win_set_flag(
-			window_id,
-			WinSetFlags.WS_EX_TRANSPARENT,
-			true
-		)
+		WinSetFlags.win_set_flag(window_id, WinSetFlags.WS_EX_LAYERED, true)
+		WinSetFlags.win_set_flag(window_id, WinSetFlags.WS_EX_TRANSPARENT, true)
 
 	# connecting SettingsManager signal to update runtime parameters dynamically
-	if is_instance_valid(settings_manager):
-		settings_manager.settings_changed.connect(_on_settings_changed)
-		_on_settings_changed()
+	settings_manager.settings_changed.connect(_on_settings_changed)
+	_on_settings_changed()
 
 func _on_settings_changed() -> void:
-	if not is_instance_valid(settings_manager):
-		return
-		
 	# apply cached settings manager properties directly to export variables
 	offset_x_pixels = settings_manager.offset_x
 	offset_y_pixels = settings_manager.offset_y
@@ -140,6 +125,8 @@ func _on_viewport_size_changed() -> void:
 	_update_cached_offsets()
 
 func _update_cached_offsets() -> void:
+	# this check prevents runtime crash with a race condition
+	# on app exit if func is called after either node already torn down
 	if not is_instance_valid(camera) or not is_instance_valid(target_model):
 		return
 
@@ -177,9 +164,11 @@ func _process(delta: float) -> void:
 		else:
 			return
 
+	# this check prevents runtime crash with a possible race condition
+	# on app start (frame 1) when camera hasn't been registered yet. 
+	# 2nd camera check can grab camera on frame 2.
 	if not camera:
 		camera = get_viewport().get_camera_3d()
-
 		if not camera:
 			return
 
@@ -191,8 +180,8 @@ func _process(delta: float) -> void:
 
 	time_passed += delta
 
-	# run heavy raycast math only if the mouse moved from last pos
 	var global_mouse = DisplayServer.mouse_get_position()
+	# run heavy raycast math only if the mouse moved from last pos
 	if global_mouse != last_mouse_pos:
 		last_mouse_pos = global_mouse
 
@@ -219,11 +208,7 @@ func _process(delta: float) -> void:
 					if not is_nan(calc_yaw):
 						target_yaw = calc_yaw
 
-	target_model.rotation.y = lerp_angle(
-		target_model.rotation.y,
-		target_yaw,
-		delta * rotation_speed
-	)
+	target_model.rotation.y = lerp_angle(target_model.rotation.y, target_yaw, delta * rotation_speed)
 
 	# lightweight wave motion phase (single trig evaluation drives heave, pitch, and roll)
 	var wave_y: float = 0.0
@@ -252,15 +237,7 @@ func set_click_through(enabled: bool) -> void:
 		return
 		
 	var window_id := get_window().get_window_id()
-	if enabled:
-		WinSetFlags.win_set_flag(
-			window_id,
-			WinSetFlags.WS_EX_TRANSPARENT,
-			true
-		)
+	if enabled: 
+		WinSetFlags.win_set_flag(window_id, WinSetFlags.WS_EX_TRANSPARENT, true)
 	else:
-		WinSetFlags.win_set_flag(
-			window_id,
-			WinSetFlags.WS_EX_TRANSPARENT,
-			false
-		)
+		WinSetFlags.win_set_flag(window_id, WinSetFlags.WS_EX_TRANSPARENT, false)

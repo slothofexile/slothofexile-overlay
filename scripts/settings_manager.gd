@@ -1,6 +1,6 @@
 extends Node
 
-# signal emitted when settings are saved or loaded to update overlay properties
+# emit signal when settings are saved or loaded to overlay_main.gd
 signal settings_changed
 
 # for some reason this doesn't work and the field in the inspector goes missing: @export var overlay_main: Node3D
@@ -80,23 +80,20 @@ func _setup_tray() -> void:
 	_assign_tray_menu.call_deferred()
 
 func _assign_tray_menu() -> void:
-	if is_instance_valid(tray_icon) and is_instance_valid(tray_menu):
-		tray_icon.menu = tray_menu.get_path()
+	tray_icon.menu = tray_menu.get_path()
 
 func _setup_settings_window() -> void:
 	settings_window = SETTINGS_WINDOW_SCENE.instantiate()
 	
 	# disable window click-through while editing settings
 	settings_window.about_to_popup.connect(func():
-		if is_instance_valid(overlay_main) and overlay_main.has_method("set_click_through"):
-			overlay_main.set_click_through(false)
+		overlay_main.set_click_through(false)
 	)
 	
 	# re-enable window click-through when closing settings
 	settings_window.visibility_changed.connect(func():
 		if not settings_window.visible:
-			if is_instance_valid(overlay_main) and overlay_main.has_method("set_click_through"):
-				overlay_main.set_click_through(true)
+			overlay_main.set_click_through(true)
 	)
 
 	connect_settings_window(settings_window)
@@ -122,14 +119,11 @@ func _on_tray_menu_pressed(id: int) -> void:
 
 func get_current_log_path() -> String:
 	match log_mode:
-		0:
-			return DEFAULT_LOG_PATH_STANDALONE
-		1:
-			return DEFAULT_LOG_PATH_STEAM
-		2:
-			return log_path_custom
-		_:
-			return DEFAULT_LOG_PATH_STANDALONE
+		0: return DEFAULT_LOG_PATH_STANDALONE
+		1: return DEFAULT_LOG_PATH_STEAM
+		2: return log_path_custom
+		# not strictly necessary, as there's now ini validation in load_ini()
+		_: return DEFAULT_LOG_PATH_STANDALONE
 
 func load_ini() -> void:
 	var config = ConfigFile.new()
@@ -226,7 +220,7 @@ func connect_settings_window(window: Window) -> void:
 	window.save_requested.connect(_on_window_save_requested)
 	window.preview_changed.connect(_on_window_preview_changed)
 	window.reset_requested.connect(func(): _on_window_reset_requested(window))
-	# reload from INI to undo real-time preview changes
+	# reload from ini to undo real-time preview changes
 	window.cancel_requested.connect(load_ini) 
 
 func _on_window_save_requested(new_settings: Dictionary, _log_changed: bool) -> void:

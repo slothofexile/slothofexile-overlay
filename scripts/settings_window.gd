@@ -27,7 +27,7 @@ const DEFAULT_LOG_PATH_STEAM: String = "C:\\Program Files (x86)\\Steam\\steamapp
 
 func _ready() -> void:
 	# set small font theme globally for window
-	# could be something programmatically adjusted later on, but not now
+	# could be something programmatically adjusted later on(?), but not now
 	var small_theme = Theme.new()
 	small_theme.set_default_font_size(13)
 	theme = small_theme

@@ -28,7 +28,7 @@ func _ready() -> void:
 			# get initial size and close immediately
 			last_file_size = file.get_length()
 			file.close()
-			# ##### print("Log reader initialized. Tracking: ", current_log_path)
+			##### print("Log reader initialized. Tracking: ", current_log_path)
 		
 		# Godot doesn't have a native filewatcher so there's no choice but to set up polling on an arbitrary interval
 		# on my own clients.txt, the fastest "[Loading Screen]... Duration" is around 1.1 seconds
@@ -38,8 +38,8 @@ func _ready() -> void:
 		poll_timer.autostart = true
 		poll_timer.timeout.connect(_on_poll_timer_timeout)
 		add_child(poll_timer)
-	# ##### else:
-		# ##### print("Client.txt not found at: ", current_log_path)
+	##### else:
+		##### print("Client.txt not found at: ", current_log_path)
 
 func _get_log_path() -> void:
 	var config = ConfigFile.new()
@@ -53,7 +53,7 @@ func _get_log_path() -> void:
 		else:
 			current_log_path = config.get_value("Settings", "log_path_custom", "")
 	else:
-		# ini does not exist (like on 1st run or ini deleted), check default paths in order
+		# ini does not exist (as on 1st run or if ini deleted), check default paths in order
 		if FileAccess.file_exists(DEFAULT_PATH_STANDALONE):
 			current_log_path = DEFAULT_PATH_STANDALONE
 		elif FileAccess.file_exists(DEFAULT_PATH_STEAM):
@@ -82,12 +82,13 @@ func _on_poll_timer_timeout() -> void:
 		
 		_parse_new_log_data(new_data)
 		
+	# if the user deleted or cleared the log file while running, reset the offset
+	# case shouldn't happen often, but it can happen
 	elif current_size < last_file_size:
-		# if the user deleted or cleared the log file while running, reset the offset
-		# case shouldn't happen often, but it can happen
 		last_file_size = current_size
 		
-	# supposedly Windows is good with file read concurrency but better be safe by closing every time
+	# supposedly Windows is good with file read concurrency
+	# but better be safe by closing every time
 	file.close()
 
 func _parse_new_log_data(data: String) -> void:
