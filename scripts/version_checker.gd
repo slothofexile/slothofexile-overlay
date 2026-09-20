@@ -1,5 +1,7 @@
-# this script is 90% AI boilerplate
-# nothing to see here, move along
+# this script is 103.33% AI boilerplate
+# why 103.33%?
+# because I *deleted* 3 lines with useless string comparisons
+# updated the version and repo strings, then left everything else as is
 
 class_name VersionChecker
 extends Node
@@ -7,8 +9,6 @@ extends Node
 @export var current_version: String = "3.29_v15"
 @export var github_repo: String = "slothofexile/slothofexile-overlay"
 @export var overlay_main: Node3D
-
-
 
 func _ready() -> void:
 	check_version()
