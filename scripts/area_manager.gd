@@ -1,7 +1,11 @@
+# used AI to add mindless implementation of debug output messages
+
 class_name AreaManager
 extends Node
 
 signal preset_changed(preset_name: String)
+
+const PRESET_DIR_PATH: String = "res://data/presets/"
 
 @export_group("Global Settings")
 @export var window_pixel_offset: Vector2i = Vector2i.ZERO 
@@ -18,7 +22,7 @@ signal preset_changed(preset_name: String)
 @export var presets: Array[AreaPreset] = []
 
 # preset to apply automatically when the scene loads
-@export var default_preset_name: String = "coastal_hideout"
+@export var default_preset_name: String = "The Sovereign"
 
 var preset_map: Dictionary = {}
 
@@ -28,11 +32,14 @@ func _ready() -> void:
 		var current_pos = DisplayServer.window_get_position()
 		DisplayServer.window_set_position(current_pos + window_pixel_offset)
 
-	# index presets by their filename (ex. "coastal_hideout.tres" -> "coastal_hideout")
+	_load_presets_from_dir()
+
+	# index presets manually assigned in inspector
 	for p in presets:
-		if p and p.resource_path:
-			var preset_name = p.resource_path.get_file().get_basename()
-			preset_map[preset_name] = p
+		if p and p.preset_name != "":
+			preset_map[p.preset_name] = p
+
+	print("[AreaManager] Final loaded preset keys in map (%d): %s" % [preset_map.size(), preset_map.keys()])
 
 	# connect log reader signal if assigned
 	if is_instance_valid(log_reader) and log_reader.has_signal("area_entered"):
@@ -42,23 +49,60 @@ func _ready() -> void:
 	if default_preset_name != "":
 		apply_preset(default_preset_name)
 
+func _load_presets_from_dir() -> void:
+	var dir = DirAccess.open(PRESET_DIR_PATH)
+	if not dir:
+		print("[AreaManager] ERROR: Could not open directory at path: ", PRESET_DIR_PATH)
+		return
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+
+	while file_name != "":
+		if not dir.current_is_dir():
+			# handle .remap / .import files in editor or exported builds
+			var clean_file_name = file_name.replace(".remap", "").replace(".import", "")
+			if clean_file_name.ends_with(".tres"):
+				var full_path = PRESET_DIR_PATH.path_join(clean_file_name)
+				var resource = load(full_path)
+				
+				if resource is AreaPreset:
+					if resource.preset_name != "":
+						preset_map[resource.preset_name] = resource
+						print("[AreaManager] Registered preset file: '%s' -> key: '%s'" % [file_name, resource.preset_name])
+					else:
+						print("[AreaManager] WARN: Resource at '%s' loaded, but its 'preset_name' property is empty!" % full_path)
+				else:
+					var res_type = resource.get_class() if resource else "null"
+					print("[AreaManager] WARN: Resource at '%s' is not an AreaPreset (Type: %s)" % [full_path, res_type])
+
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
+
 func _on_area_entered(raw_area_name: String) -> void:
-	# convert log string "Coastal Hideout" to preset key "coastal_hideout"
-	var formatted_key = raw_area_name.to_lower().replace(" ", "_")
-	apply_preset(formatted_key)
+	print("[AreaManager] Signal received for area: '%s'" % raw_area_name)
+	apply_preset(raw_area_name)
 
 func apply_preset(preset_name: String) -> void:
+	print("[AreaManager] Attempting to apply preset: '%s'" % preset_name)
+
 	if not preset_map.has(preset_name):
-		push_warning("Area preset '%s' not found!" % preset_name)
+		push_warning("[AreaManager] Area preset '%s' not found! Registered keys: %s" % [preset_name, preset_map.keys()])
 		return
 		
 	var data: AreaPreset = preset_map[preset_name]
 	
-	# apply camera position/rotation (FOV/Zoom handled globally by SettingsManager)
+	print("[AreaManager] Applying '%s':" % preset_name)
+	print("  ├─ Camera Pos: %s | Rot: %s" % [data.camera_position, data.camera_rotation_degrees])
+	print("  ├─ Light Energy: %.2f | Color: %s | Rot: %s" % [data.light_energy, data.light_color, data.light_rotation_degrees])
+	print("  ├─ Ambient Energy: %.2f | Color: %s" % [data.ambient_energy, data.ambient_color])
+	print("  └─ Shadow Opacity: %.2f | Tint: %s" % [data.shadow_opacity, data.shadow_tint])
+
+	# apply camera position/rotation
 	if camera:
 		camera.position = data.camera_position
 		camera.rotation_degrees = data.camera_rotation_degrees
-							  
 		
 	# apply lighting
 	if directional_light:
@@ -79,31 +123,13 @@ func apply_preset(preset_name: String) -> void:
 		)
 		env.ambient_light_energy = maxf(0.0, effective_ambient_energy)
 
-	# apply shadow opacity to the shader
-	if is_instance_valid(shadow_plane):
-		var mesh_inst: MeshInstance3D = null
-
-		if shadow_plane is MeshInstance3D:
-			mesh_inst = shadow_plane as MeshInstance3D
-		else:
-			for child in shadow_plane.get_children():
-				if child is MeshInstance3D:
-					mesh_inst = child
-					break
-
-		if is_instance_valid(mesh_inst):
-			var mat = mesh_inst.material_override
-			if not mat:
-				mat = mesh_inst.get_active_material(0)
-
-			if mat is ShaderMaterial:
-				var shadow_rgb = Vector3(
-					data.shadow_tint.r,
-					data.shadow_tint.g,
-					data.shadow_tint.b
-				)
-				mat.set_shader_parameter("shadow_color", shadow_rgb)
-				mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
+	# direct material override update
+	if shadow_plane:
+		var mat = shadow_plane.material_override
+		if mat is ShaderMaterial:
+			var shadow_rgb = Vector3(data.shadow_tint.r, data.shadow_tint.g, data.shadow_tint.b)
+			mat.set_shader_parameter("shadow_color", shadow_rgb)
+			mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
 
 	preset_changed.emit(preset_name)
 
