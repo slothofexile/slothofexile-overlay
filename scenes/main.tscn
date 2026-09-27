@@ -9,7 +9,11 @@
 [ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="7_kek77"]
 [ext_resource type="Resource" uid="uid://b7xvcs4kfsecb" path="res://data/presets/coastal_hideout.tres" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://826mph7oo61y" path="res://scripts/settings_manager.gd" id="9_85g3d"]
+[ext_resource type="Resource" uid="uid://bt6unbrolyb37" path="res://data/presets/karui_shores.tres" id="9_trceg"]
+[ext_resource type="Resource" uid="uid://duqtegolp1hfu" path="res://data/presets/the_sovereign.tres" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://b1rhnval0cixl" path="res://scripts/log_reader.gd" id="10_choun"]
+[ext_resource type="Script" uid="uid://dpvpnfykn06qy" path="res://scripts/version_checker.gd" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://c1sui2ifykxe" path="res://scripts/preset_tuner.gd" id="12_eb6dy"]
 
 [sub_resource type="Environment" id="Environment_cmnmv"]
 ambient_light_source = 2
@@ -32,8 +36,9 @@ size = Vector2(20, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
 
-[node name="OverlayMain" type="Node3D" unique_id=798838362]
+[node name="OverlayMain" type="Node3D" unique_id=798838362 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_0xm2m")
+camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1564820067]
 transform = Transform3D(1, 0, 0, 0, 0.75114435, 0.660138, 0, -0.660138, 0.75114435, -0.27239442, 17.090057, 15.406284)
@@ -81,12 +86,25 @@ directional_light = NodePath("../DirectionalLight3D")
 world_environment = NodePath("../WorldEnvironment")
 shadow_plane = NodePath("../cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
 log_reader = NodePath("../LogReader")
-presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u")])
+presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u"), ExtResource("9_trceg"), ExtResource("10_a8y0u")])
 
 [node name="SettingsManager" type="Node" parent="." unique_id=1250105236]
 script = ExtResource("9_85g3d")
 
 [node name="LogReader" type="Node" parent="." unique_id=290495636]
 script = ExtResource("10_choun")
+
+[node name="VersionChecker" type="Node" parent="." unique_id=1530978374 node_paths=PackedStringArray("overlay_main")]
+script = ExtResource("11_ya4ey")
+overlay_main = NodePath("..")
+
+[node name="PresetTuner" type="Node" parent="." unique_id=732527012 node_paths=PackedStringArray("camera", "directional_light", "world_environment", "shadow_plane", "area_manager")]
+script = ExtResource("12_eb6dy")
+camera = NodePath("../Camera3D")
+directional_light = NodePath("../DirectionalLight3D")
+world_environment = NodePath("../WorldEnvironment")
+shadow_plane = NodePath("../cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
+area_manager = NodePath("../AreaManager")
+metadata/_custom_type_script = "uid://c1sui2ifykxe"
 
 [editable path="cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2"]
