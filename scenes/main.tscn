@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://bt6unbrolyb37" path="res://data/presets/karui_shores.tres" id="9_trceg"]
 [ext_resource type="Resource" uid="uid://duqtegolp1hfu" path="res://data/presets/the_sovereign.tres" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://b1rhnval0cixl" path="res://scripts/log_reader.gd" id="10_choun"]
+[ext_resource type="Resource" uid="uid://dcydquk2q1qw7" path="res://data/presets/the_fathomless_depths.tres" id="11_jkv2x"]
 [ext_resource type="Script" uid="uid://dpvpnfykn06qy" path="res://scripts/version_checker.gd" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://c1sui2ifykxe" path="res://scripts/preset_tuner.gd" id="12_eb6dy"]
 
@@ -86,7 +87,7 @@ directional_light = NodePath("../DirectionalLight3D")
 world_environment = NodePath("../WorldEnvironment")
 shadow_plane = NodePath("../cheems v3_28_3 eyepatch + boat + cheems + hat + pole + flag joined v2/Plane")
 log_reader = NodePath("../LogReader")
-presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u"), ExtResource("9_trceg"), ExtResource("10_a8y0u")])
+presets = Array[ExtResource("7_kek77")]([ExtResource("8_4c57u"), ExtResource("9_trceg"), ExtResource("10_a8y0u"), ExtResource("11_jkv2x")])
 
 [node name="SettingsManager" type="Node" parent="." unique_id=1250105236]
 script = ExtResource("9_85g3d")
