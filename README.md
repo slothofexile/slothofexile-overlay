@@ -13,7 +13,7 @@
 <br>
 
 
-**About this project:**
+# **About this project:**
 
 I started playing Path of Exile around Legacy league and I had always wanted to play with a character overlay (like the streamers did) but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
@@ -38,7 +38,9 @@ This is also inspired by all these newer type of **animated/interactive** player
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/54ecb7e1-e9df-406c-9bdf-9b10bbba9a9a" />
 <img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/ca6e0ead-c3d5-4e1a-b537-5e75017cc4d7" />
 
-** I've been told that these are on OBS and the player can't actually see these example overlays, but the audience does.
+** I've been told that these are on OBS and the player can't actually see these overlays, and only the audience does.
+
+_I'm thinking I could work on an OBS-only version where it only appears for your viewers, but that's not really high priority feature right now._
 
 
 <br>
@@ -60,7 +62,7 @@ Only you and your audience can see the overlay. It doesn't mess with any other p
 <br>
 <br>
 
-**Warning, here be dragons.**
+# **Warning, here be dragons.**
 
 It's been slow going because I've had to learn Blender and Godot from scratch, and I've only managed to learn it enough to get something out that just barely works and doesn't explode (so far). In case you couldn't tell, this is also my first time using Github. 
 
@@ -75,7 +77,7 @@ Just check out this mess of 3d asset imports into Godot. All I know for now is t
 <br>
 <br>
 
-**Any AI use?**
+# **Any AI use?**
 
 Lots! _But probably not where and how you think it's been used._
 
@@ -85,7 +87,7 @@ Same goes for log file parsing > it's all just basic string manipulation.
 
 AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a particular platform/environment. Like how Godot implements something like shadows or handles lighting, etc.... Knowing how to render a 2d sprite in AutoIT + Windows GDI API, doesn't translate well to Godot outside of the pure/basic math. 
 
-Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working.
+Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working. 
 
 It was with these things that would have taken forever to learn, that _was not_ coding, where AI was 120% helpful. 
 
@@ -105,17 +107,21 @@ Having said that, I do think that AI usage is still probably tiny compared to a 
 <br>
 <br>
 
-**How To:**
+# **How To:**
 
-Just run the exe and the overlay should appear in your primary monitor. It should also appear on your taskbar.
+Just run the exe and the overlay should appear in your primary monitor. It should also appear on your taskbar. (That's the default icon for Godot games -- I have yet to make my own icon.)
 
 <img width="167" height="59" alt="image" src="https://github.com/user-attachments/assets/8d0e2a61-8f0a-45af-85af-d45fd861080f" />
 
+**_If the overlay goes missing for some reason (such as switching between open windows, or using Win+D to show the desktop, just click the taskbar icon to have the overlay appear on top again._
+
 <br>
 <br>
 <br>
 
-From there, just start Path of Exile and the Overlay should still stay on top of that window. Almost perfect position.
+
+
+From there, just start Path of Exile and the Overlay should still stay on top of that window. Almost perfect position for the title screen.
 
 <img width="1921" height="1081" alt="image" src="https://github.com/user-attachments/assets/6c00a803-dc69-45bd-8e49-4807d84da8d6" />
 
@@ -124,6 +130,38 @@ From there, just start Path of Exile and the Overlay should still stay on top of
 <br>
 <br>
 
+To change Overlay Settings, just right-click the system tray icon and click **Settings**.
+
+<img width="216" height="142" alt="image" src="https://github.com/user-attachments/assets/74f99061-3cb0-4ab3-a379-587f6409469e" />
+
+
+<br>
+
+This opens the **Overlay Settings** panel:
+
+<img width="392" height="479" alt="image" src="https://github.com/user-attachments/assets/91349381-f4a5-4129-93b3-ad72c429e824" />
+
+- the display **x offset** just moves the overlay left or right from the center of the screen by X pixels (max 128). Moving it far left or far right makes the overlay look like a pet rather than the character.
+- the **y offset** moves the overlay up or down, and a bit of fine tuning is needed if you want the overlay to cover your character completely. Setting it at zero makes the overlay appear at your feet, so your head and shoulders could stick out, so the -75 default value should be a good place to start.
+- **rotation speed** is exactly that. Setting it low makes the overlay look like its drifting (like Tokyo Drift kind of drifting), especially with move skills that take time like shield charge and whirling blades.
+- **camera zoom** has the effect of making the model larger or smaller. It's technically not camera zoom but Field of View (FOV), so larger values make the model smaller and vice versa.
+- enable **wave motion**, just enables or disables the simulated water bobbing.
+- Client.txt Log Paths need to be set correctly for the overlay to know the Areas you enter. It uses this info to set the appropriate lighting/shadow and colors to match the environment.
+
+  
+_** it only has these presets for now (karui shores, coastal hideout, the sovereign, the fathomless depths)._
+<br>
+<br>
+
+
 When you want to quit the overlay, just click on the taskbar icon(?) and click Close Window.
 
 <img width="416" height="148" alt="image" src="https://github.com/user-attachments/assets/9e8d3736-c9ab-47c6-9f6f-c6eb6bb84e65" />
+
+<br>
+
+You can also click the system tray icon, and click **Exit**.
+
+<img width="216" height="142" alt="image" src="https://github.com/user-attachments/assets/56da76a1-89fe-4b59-9681-1b4d8d198d6d" />
+
+
