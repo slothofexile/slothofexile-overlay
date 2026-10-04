@@ -40,7 +40,7 @@ This is also inspired by all these newer type of **animated/interactive** player
 
 ** I've been told that these are on OBS and the player can't actually see these overlays, and only the audience does.
 
-_I'm thinking I could work on an OBS-only version where it only appears for your viewers, but that's not really high priority feature right now._
+_I'm thinking I could work on an OBS-only version where it only appears for your viewers, but that's not really a high priority feature right now._
 
 
 <br>
@@ -89,7 +89,9 @@ AI is absolutely useful in parts that aren't code -- specifically nuances in how
 
 Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help me get something working. 
 
-It was with these things that would have taken forever to learn, that _was not_ coding, where AI was 120% helpful. 
+It was with these things that would have taken forever to look for in the Godot documentation and piece together, that _was not_ coding, where AI was 120% helpful. 
+
+Boilerplate code that's tedious, time consuming, but mindless (like setting up debug message scaffolding), is where AI also saves time. (Unfortunately, Godot doesn't have anything like a variable watch pane, hence the need to set this up).
 
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything (if that's even possible). With how I've used it for this project, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
 
