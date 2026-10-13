@@ -88,6 +88,7 @@ AI is absolutely useful in parts that aren't code -- specifically nuances in how
 As far as actual AI coding goes, I found the perfect use for it was simple stuff you'd ask an intern to do, (such as adding a boatload of debug output messages). Not needing to make all that tedious, time consuming, but mindless boilerplate was a significant time saver. When I did ask it to make 1 module on its own, it made something over-engineered and oddly-designed. 
 
 (See my comments in scripts\preset_tuner.gd)
+
 ಠ_ಠ >>> └[•-•]┘
 
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything at the outset (if that's even possible). With how I've used it for this project, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
