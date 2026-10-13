@@ -85,11 +85,10 @@ If you program at all, you'll recognize that the basic logic for something like 
 
 AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a particular platform/environment. Making the original version render 2d sprites in AutoIT + Windows GDI API doesn't easily translate to doing it in Godot outside of the pure/basic math. It was with these things like shader materials, shadow planes, etc... that would have taken forever to look for in the Godot documentation and piece together, that _was not_ coding, where AI was 120% helpful. 
 
-As far as actual AI code though... here's a good example:
+As far as actual AI coding goes, I found the perfect use for it was simple stuff you'd ask an intern to do, (such as adding a boatload of debug output messages). Not needing to make all that tedious, time consuming, but mindless boilerplate was a significant time saver. When I did ask it to make 1 module on its own, it made something over-engineered and oddly-designed. 
 
-Many people (such as myself) are used to having and using a watch pane/window when coding --> this is basically a place where the programmer can "watch" specific variables, expressions, etc... in realtime. Godot's Remote View works a bit like a watch window, but for me is still no substitute. So I made do with what I like to call the poor man's watch window -- which is just a boatload of variables/expressions output as strings to the debug window. Coding any of those debug messages isn't hard at all, but there is a _lot_ of them to do. That task is something that you would and could delegate to an intern, but in this case I think it's a good use for AI. Less complex and less decisions for AI to make = less chance of AI making mistakes, and I can't think of anything simpler than adding debug scaffolding. 
-
-Not needing to make all that tedious, time consuming, but mindless boilerplate was a significant time saver.
+(See my comments in scripts\preset_tuner.gd)
+ಠ_ಠ >>> └[•-•]┘
 
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything at the outset (if that's even possible). With how I've used it for this project, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
 
