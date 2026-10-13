@@ -93,9 +93,9 @@ It was with these things that would have taken forever to look for in the Godot 
 
 As far as actual AI code though... here's a good example:
 
-Many people (such as myself) are used to having and using a watch pane/window --> this is basically a place where a programmer can "watch" specific variables, expressions, etc... in realtime. This helps you because you can immediately see if some function you just coded (like reading the log file for example) really returns the expected value (like the actual Area name). 
+Many people (such as myself) are used to having and using a watch pane/window --> this is basically a place where the programmer can "watch" specific variables, expressions, etc... in realtime. This helps you because you can immediately see if some function you just coded (like reading the log file for example) really returns the expected value (like the actual Area name). It's much faster to do, less of a chore than writing unit tests instead (at least for me), and gives almost immediate feedback, and better than breakpoints+local in the sense that it doesn't break program execution.
 
-Because Godot doesn't have anything like that, a watch pane or watch window, I just made do with what I call the poor man's watch pane -- which is just a boatload of variables output to the debug window. Coding any of that isn't hard at all, but there is a _lot_ of them to do. That task is something that you would and could trust an intern to do, but in this case I think is a appropriate application of just having AI do it. Less complex and less decisions to make = less chance of AI making mistakes. 
+Because Godot doesn't have anything like that watch pane or watch window, I made do with what I call the poor man's watch pane -- which is just a boatload of variables output to the debug window. Coding any of those debug messages isn't hard at all, but there is a _lot_ of them to do. That task is something that you would and could trust an intern to do, but in this case I think it was one appropriate application of just having AI do it. Less complex and less decisions to make = less chance of AI making mistakes and I can't think of anything less complex than adding debug scaffolding. 
 
 Not needing to make all that tedious, time consuming, but mindless boilerplate was a significant time saver.
 
