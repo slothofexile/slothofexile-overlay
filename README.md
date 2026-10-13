@@ -85,12 +85,6 @@ If you program at all, you'll recognize that the basic logic for something like 
 
 AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a particular platform/environment. Making the original version render 2d sprites in AutoIT + Windows GDI API doesn't easily translate to doing it in Godot outside of the pure/basic math. It was with these things like shader materials, shadow planes, etc... that would have taken forever to look for in the Godot documentation and piece together, where AI was 120% helpful. 
 
-As far as actual AI coding goes, I found the perfect use for it was simple stuff you'd ask an intern to do, (such as adding a boatload of debug output messages). Not needing to make all that tedious, time consuming, but mindless boilerplate was a significant time saver. When I did ask it to make 1 module on its own, it made something over-engineered and oddly-designed. 
-
-(See my comments in scripts\preset_tuner.gd)
-
-ಠ_ಠ >>> └[•-•]┘
-
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything at the outset (if that's even possible). With how I've used it for this project, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
 
 <img width="470" height="181" alt="image" src="https://github.com/user-attachments/assets/7152eb62-7e3a-4ce8-bfae-957bf1193a9b" />
