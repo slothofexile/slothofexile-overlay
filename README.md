@@ -79,7 +79,7 @@ Just check out this mess of 3d asset imports into Godot. All I know for now is t
 
 # **Any AI use?**
 
-Lots! _But probably not where and how you think it's been used._
+Lots! _But probably not where and how most people might think it's been used._
 
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. 
 
@@ -91,7 +91,12 @@ Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help 
 
 It was with these things that would have taken forever to look for in the Godot documentation and piece together, that _was not_ coding, where AI was 120% helpful. 
 
-Boilerplate code that's tedious, time consuming, but mindless (like setting up debug message scaffolding), is where AI also saves time. (Unfortunately, Godot doesn't have anything like a variable watch pane, hence the need to set this up).
+As far as actual AI code though... here's a good example:
+Many people (such as myself) are used to having and using a watch pane/window --> this is basically a place where a programmer can "watch" specific variables, expressions, etc... in realtime. This helps you because you can immediately see if some function you just coded (like reading the log file for example) really returns the expected value (like the actual Area name). 
+
+Because Godot doesn't have anything like that, a watch pane or watch window, I just made do with what I call the poor man's watch pane -- which is just a boatload of variables output to the debug window. Coding any of that isn't hard at all, but there is a _lot_ of them to do. That task is something that you would and could trust an intern to do, but in this case I think is a appropriate application of just having AI do it. Less complex and less decisions to make = less chance of AI making mistakes. 
+
+Not needing to make all that tedious, time consuming, but mindless boilerplate was a significant time saver.
 
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything (if that's even possible). With how I've used it for this project, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
 
