@@ -92,6 +92,7 @@ Shader Materials? Shadow Planes? Ambient Lighting? All Greek without AI to help 
 It was with these things that would have taken forever to look for in the Godot documentation and piece together, that _was not_ coding, where AI was 120% helpful. 
 
 As far as actual AI code though... here's a good example:
+
 Many people (such as myself) are used to having and using a watch pane/window --> this is basically a place where a programmer can "watch" specific variables, expressions, etc... in realtime. This helps you because you can immediately see if some function you just coded (like reading the log file for example) really returns the expected value (like the actual Area name). 
 
 Because Godot doesn't have anything like that, a watch pane or watch window, I just made do with what I call the poor man's watch pane -- which is just a boatload of variables output to the debug window. Coding any of that isn't hard at all, but there is a _lot_ of them to do. That task is something that you would and could trust an intern to do, but in this case I think is a appropriate application of just having AI do it. Less complex and less decisions to make = less chance of AI making mistakes. 
