@@ -21,7 +21,7 @@ As of this writing (3.29 Allflame League on PoE1), the model I have on it is Che
 
 Just ignore the verbose comments throughout the codebase, as those are for myself and for my children (who I hope would contribute to the project someday). It should help them understand the thoughtspace and reasoning behind each thing.
 
-(My daughter already contributed the logo/icon!)
+(For now, my daughter's first contribution is the logo/icon!)
 
 <img width="64" height="64" alt="Untitled1 - Copy" src="https://github.com/user-attachments/assets/62481cf8-15ca-4ed8-a3f0-1d4f0e7fc674" />
 
