@@ -31,7 +31,7 @@ text = "Overlay Settings"
 
 [node name="OffsetHeaderLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1816317796]
 layout_mode = 2
-text = "Display Offset (-512 to +512 px):"
+text = "Display Offset (-128  to +128 px):"
 
 [node name="HBoxX" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1893310649]
 layout_mode = 2
@@ -44,8 +44,8 @@ text = "X pixels:"
 [node name="OffsetXSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxX" unique_id=1630400776]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-min_value = -512.0
-max_value = 512.0
+min_value = -128.0
+max_value = 128.0
 
 [node name="HBoxY" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1464333151]
 layout_mode = 2
@@ -58,8 +58,8 @@ text = "Y pixels:"
 [node name="OffsetYSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxY" unique_id=1697031142]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-min_value = -512.0
-max_value = 512.0
+min_value = -128.0
+max_value = 128.0
 
 [node name="HBoxRotation" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=918025494]
 layout_mode = 2
