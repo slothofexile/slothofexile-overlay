@@ -21,13 +21,16 @@ As of this writing (3.29 Allflame League on PoE1), the model I have on it is Che
 
 <br>
 
-**Anyway, these things are neither new, nor unique to Path of Exile.**
+
+# **What about Path of Exile terms of Service (TOS)?**
+
+**These overlays are neither new nor unique to Path of Exile.**
 
 This was first inspired by these **static** player/streamer overlays that go on top of your menu, health globes, potions, to "skin" the game UI:
 
 &emsp;(This particular example is from 10 years ago [from reddit user Musti_A](https://www.reddit.com/r/pathofexile/comments/5x9pgt/i_made_some_poe_twitch_stream_overlays_free/).)
   
-&emsp;<img width="320" height="180" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
+&emsp;<img width="160" height="90" alt="image" src="https://github.com/user-attachments/assets/00ab18ab-dee1-4c42-bea2-b7bb29184a41" />
 
 This is also inspired by all these newer type of **animated/interactive** player/streamer overlays that react to something else. Those overlays can talk or move (!) when the streamer also talks/moves.
 
@@ -38,15 +41,12 @@ This is also inspired by all these newer type of **animated/interactive** player
 <img width="160" height="90" alt="image" src="https://github.com/user-attachments/assets/54ecb7e1-e9df-406c-9bdf-9b10bbba9a9a" />
 <img width="160" height="90" alt="image" src="https://github.com/user-attachments/assets/ca6e0ead-c3d5-4e1a-b537-5e75017cc4d7" />
 
-** I've been told that these are on OBS and the player can't actually see these overlays, and only the audience does.
-
-_I'm thinking I could work on an OBS-only version where it only appears for your viewers, but that's not really a high priority feature right now._
-
-
 <br>
 &nbsp;
   
-My overlay doesn't talk, but it does rotate in place. Functionally, it interacts with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. Architecturally, it's its own transparent Godot "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to which ever window is under it.
+Functionally, the overlay interacts only with the Windows OS (not with the game) to figure out where the mouse is and rotates in place to follow the pointer. 
+
+Architecturally, it's its own transparent Godot "game" that just so happens to also be transparent to mouse clicks, allowing those clicks to pass through to whatever is under it -- which could be _ANYTHING_, like Path of Exile 1, 2, Notepad, or even just the bare desktop.
 
 <img width="381" height="188" alt="image" src="https://github.com/user-attachments/assets/5dce2dbc-7345-44c7-a4bd-d744bab35c57" />
 
@@ -54,10 +54,7 @@ My overlay doesn't talk, but it does rotate in place. Functionally, it interacts
 
 The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this exact way of reading the logs, from [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago) to the latest tools like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
 
-Only you and your audience can see the overlay. It doesn't mess with any other players (which is more that I can say for some MTX out there, like that damned Goblin Band). 
-
-
-
+The only file it edits is its own settings file, to save your preferences. And the only internet access is one time on startup to check github for newer versions.
 
 <br>
 <br>
@@ -68,7 +65,7 @@ It's been slow going because I've had to learn Blender and Godot from scratch, a
 
 Just check out this mess of 3d asset imports into Godot. All I know for now is that it works, so I don't dare clean it up and have something break.
 
-<img width="162" height="284" alt="image" src="https://github.com/user-attachments/assets/4dab5f0e-d66a-4774-901c-d1e694ddbc92" />
+<img width="81" height="142" alt="image" src="https://github.com/user-attachments/assets/4dab5f0e-d66a-4774-901c-d1e694ddbc92" />
 
 
 
