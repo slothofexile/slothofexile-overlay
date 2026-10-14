@@ -17,7 +17,14 @@
 
 I started playing Path of Exile around Legacy league and I had always wanted to play with a character overlay (like the streamers did) but couldn't find one, so I made one -- first in Autoit using GDI+ then rewritten from the ground up in Godot 4.
 
-As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch. _I can see all that getting updated with every new league if this project turns out to be a long term thing._
+As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch.
+
+Just ignore the verbose comments throughout the codebase, as those are for myself and for my children (who I hope would contribute to the project someday). It should help them understand the thoughtspace and reasoning behind each thing.
+
+(My daughter already contributed the logo/icon!)
+
+<img width="64" height="64" alt="Untitled1 - Copy" src="https://github.com/user-attachments/assets/62481cf8-15ca-4ed8-a3f0-1d4f0e7fc674" />
+
 
 <br>
 
@@ -54,7 +61,7 @@ Architecturally, it's its own transparent Godot "game" that just so happens to a
 
 The only actual interaction with the game happens when _reading_ the game text logs to figure out what area you're in (which it needs to set lighting/shadows). Many of the 3rd-party tools also do this exact way of reading the logs, from [CurrencyCop from way back](https://github.com/currency-cop/currency-cop) (which I used 8-9 years ago) to the latest tools like [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) (which I still use), or [Lailoken's ExileUI](https://github.com/Lailloken/Exile-UI).
 
-The only file it edits is its own settings file, to save your preferences. And the only internet access is one time on startup to check github for newer versions.
+The only file it edits is its own settings file, to save your preferences. And the only internet access is done one time on each overlay startup, just to check github for newer versions.
 
 <br>
 <br>
