@@ -74,7 +74,7 @@ var is_app_minimized: bool = false
 func _ready() -> void:
 	# DWM stutter (desync?) if PoE and overlay both at vsync for some reason,
 	# cap at 60 FPS fixes it(?)
-	# tbh, I can't really tell with my bad/old monitors if it's OOS or just bad pixel afterimage or ghosting
+	# tbh, I can't really tell with my old monitors if it's OOS or just bad pixel afterimage or ghosting
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	Engine.max_fps = 60
 
@@ -103,9 +103,10 @@ func _on_settings_changed() -> void:
 	offset_y_pixels = settings_manager.offset_y
 	rotation_speed = settings_manager.rotation_speed
 	enable_wave_motion = settings_manager.wave_motion
-	
-	
 	camera_zoom = settings_manager.camera_zoom
+	
+	# _on_settings_changed() can still trigger before camera is instantiated
+	# requiring this check, or else will cause runtime crash
 	if is_instance_valid(camera):
 		camera.fov = camera_zoom
 	
@@ -125,8 +126,8 @@ func _on_viewport_size_changed() -> void:
 	_update_cached_offsets()
 
 func _update_cached_offsets() -> void:
-	# this check prevents runtime crash with a race condition
-	# on app exit if func is called after either node already torn down
+	# this check prevents another runtime crash with a race condition on app exit
+	# if func is called after either node already torn down
 	if not is_instance_valid(camera) or not is_instance_valid(target_model):
 		return
 
@@ -164,9 +165,9 @@ func _process(delta: float) -> void:
 		else:
 			return
 
-	# this check prevents runtime crash with a possible race condition
-	# on app start (frame 1) when camera hasn't been registered yet. 
-	# 2nd camera check can grab camera on frame 2.
+	# 2nd check prevents runtime crash with possible race condition
+	# on app start (frame 1) when camera hasn't been registered yet
+	# succeeding iteration can then safely grab camera on frame 2 onwards
 	if not camera:
 		camera = get_viewport().get_camera_3d()
 		if not camera:
@@ -208,7 +209,9 @@ func _process(delta: float) -> void:
 					if not is_nan(calc_yaw):
 						target_yaw = calc_yaw
 
-	target_model.rotation.y = lerp_angle(target_model.rotation.y, target_yaw, delta * rotation_speed)
+	var rotation_weight := clampf(delta * rotation_speed, 0.0, 1.0)
+	target_model.rotation.y = lerp_angle(target_model.rotation.y, target_yaw, rotation_weight)
+	
 
 	# lightweight wave motion phase (single trig evaluation drives heave, pitch, and roll)
 	var wave_y: float = 0.0
@@ -231,7 +234,11 @@ func _process(delta: float) -> void:
 	target_model.rotation.z = wave_roll
 
 
-# the settings_manager has to toggle this whenever the settings window is open to allow interaction with it
+# the settings_manager needs to toggle this whenever the settings window is open to allow interaction with it
+# 
+# known issue(?) 
+# the Godot viewport width and height still determines the click through area regardless of this setting
+# so even a visually small settings window will block off clicking beyond its visible borders up to the borders of the viewport
 func set_click_through(enabled: bool) -> void:
 	if not Engine.has_singleton("WinSetFlags"):
 		return

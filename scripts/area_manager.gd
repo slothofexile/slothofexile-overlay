@@ -1,4 +1,6 @@
-# used AI to add mindless implementation of debug output messages
+# told AI to add debug output scaffolding all over
+# why doesn't Godot have watch variables? ;(
+# Remote view is not a direct substitute
 
 class_name AreaManager
 extends Node
@@ -21,8 +23,10 @@ const PRESET_DIR_PATH: String = "res://data/presets/"
 # drag/drop .tres files into this array in the inspector
 @export var presets: Array[AreaPreset] = []
 
-# preset to apply automatically when the scene loads
-@export var default_preset_name: String = "The Sovereign"
+# I just use this to more easily make area presets 
+# (loading an area without needing to read log file)
+# but this is almost immediately overwritten by the 1st town loading when in-game
+@export var default_preset_name: String = "Monastery of the Keepers"
 
 var preset_map: Dictionary = {}
 
@@ -95,9 +99,9 @@ func apply_preset(preset_name: String) -> void:
 	
 	print("[AreaManager] Applying '%s':" % preset_name)
 	print("  ├─ Camera Pos: %s | Rot: %s" % [data.camera_position, data.camera_rotation_degrees])
-	print("  ├─ Light Energy: %.2f | Color: %s | Rot: %s" % [data.light_energy, data.light_color, data.light_rotation_degrees])
-	print("  ├─ Ambient Energy: %.2f | Color: %s" % [data.ambient_energy, data.ambient_color])
-	print("  └─ Shadow Opacity: %.2f | Tint: %s" % [data.shadow_opacity, data.shadow_tint])
+	print("  ├─ Light Energy: %.2f | Color: #%s | A: %d | Rotation: %s" % [data.light_energy, data.light_color.to_html(false), roundi(data.light_color.a * 255.0), data.light_rotation_degrees])
+	print("  ├─ Ambient Energy: %.2f | Color: #%s | Alpha: %d" % [data.ambient_energy, data.ambient_color.to_html(false), roundi(data.ambient_color.a * 255.0)])
+	print("  └─ Shadow Opacity: %.2f | Tint: #%s | Alpha: %d" % [data.shadow_opacity, data.shadow_tint.to_html(false), roundi(data.shadow_tint.a * 255.0)])
 
 	# apply camera position/rotation
 	if camera:
@@ -117,19 +121,17 @@ func apply_preset(preset_name: String) -> void:
 		var env = world_environment.environment
 		env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 		env.ambient_light_color = data.ambient_color
+		env.ambient_light_energy = data.ambient_energy
 		
-		var effective_ambient_energy = (
-			data.ambient_energy * (1.0 - data.shadow_opacity)
-		)
-		env.ambient_light_energy = maxf(0.0, effective_ambient_energy)
 
-	# direct material override update
-	if shadow_plane:
-		var mat = shadow_plane.material_override
-		if mat is ShaderMaterial:
-			var shadow_rgb = Vector3(data.shadow_tint.r, data.shadow_tint.g, data.shadow_tint.b)
-			mat.set_shader_parameter("shadow_color", shadow_rgb)
-			mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
+	# allows tinting of the shadow falling on the shadowcatcher plane, 
+	# separate from light color or ambient color
+	var mat = shadow_plane.material_override
+	var linear_tint = data.shadow_tint.srgb_to_linear()
+	var shadow_rgb = Vector3(linear_tint.r, linear_tint.g, linear_tint.b)
+	mat.set_shader_parameter("shadow_color", shadow_rgb)
+	mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
+
 
 	preset_changed.emit(preset_name)
 
