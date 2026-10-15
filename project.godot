@@ -13,7 +13,7 @@ config_version=5
 config/name="SlothofExile Overlay"
 run/main_scene="uid://dpjjyhab6ponh"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://da1jqj2mvv1bp"
 
 [display]
 
