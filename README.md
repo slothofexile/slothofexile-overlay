@@ -19,17 +19,18 @@ I started playing Path of Exile around Legacy league and I had always wanted to 
 
 As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch.
 
-Just ignore the verbose comments throughout the codebase, as those are for myself and for my children (who I hope would contribute to the project someday). It should help them understand the thoughtspace and reasoning behind each thing.
+My comments throughout the codebase are mostly for my children (who I hope would contribute to the project someday). I very rarely comment my code, but my son is taking up CS and so I'm trying to be a good example.
 
-(For now, my daughter's first contribution is the logo/icon!)
+(My daughter's first contribution is the logo/icon!)
 
 <img width="64" height="64" alt="Untitled1 - Copy" src="https://github.com/user-attachments/assets/62481cf8-15ca-4ed8-a3f0-1d4f0e7fc674" />
 
 
 <br>
+<br>
 
 
-# **What about Path of Exile terms of Service (TOS)?**
+# **What about Path of Exile Terms of Service (TOS)?**
 
 **These overlays are neither new nor unique to Path of Exile.**
 
