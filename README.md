@@ -19,7 +19,7 @@ I started playing Path of Exile around Legacy league and I had always wanted to 
 
 As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch.
 
-Just ignore most of my comments throughout the codebase as they're mostly for my children (who I hope would contribute to the project someday). I normally see commenting code as a chore, but my son is taking up CS so I'm just trying to set a good example. (It's somehow less of a chore if I think about it that way, that he'll be reading those eventually.)
+Just ignore most of my comments throughout the codebase as they're mostly for my children (who I hope would contribute to the project someday). Commenting code always felt like a chore, but my son is taking up CS right now so I'm just trying to set a good example. (It's somehow less of a chore if I think about it that way -- that he'll be reading those eventually.)
 
 (My daughter's first contribution is the logo/icon!)
 
