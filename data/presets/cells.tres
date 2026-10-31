@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://ch1334lidi2jv"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_4776f"]
+
+[resource]
+script = ExtResource("1_4776f")
+preset_name = "The Rogue Harbor"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-22, -25, 0)
+light_color = Color(1, 0.9529412, 0.8784314, 1)
+light_energy = 0.5
+shadow_blur = 7.5
+ambient_color = Color(0.2784314, 0.23529412, 0.14901961, 1)
+ambient_energy = 0.5
+shadow_opacity = 0.82
+shadow_tint = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"
