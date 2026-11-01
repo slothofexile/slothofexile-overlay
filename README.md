@@ -88,6 +88,8 @@ Lots! _But probably not where and how most people might think it's been used._
 
 If you program at all, you'll recognize that the basic logic for something like this is simple high-school level math. Like mouse tracking is just arctan formulas to get angles, then rotate models by XYZ degrees, etc... It's the same logic whether on the original AutoIT or in Godot. Same goes for log file parsing > it's all just basic string manipulation.
 
+You don't need AI for that.
+
 AI is absolutely useful in parts that aren't code -- specifically nuances in how things are implemented in a particular platform/environment. Making the original version render 2d sprites in AutoIT + Windows GDI API doesn't easily translate to doing it in Godot outside of the pure/basic math. It was with these things like shader materials, shadow planes, etc... that would have taken forever to look for in the Godot documentation and piece together, where AI was 120% helpful. 
 
 Having said that, I do think that AI usage is still probably tiny compared to a non-programmer asking AI to just make everything at the outset (if that's even possible). With how I've used it for this project, I've never gone beyond single-digit % weekly usage limits even with the smallest free-tier quota.
