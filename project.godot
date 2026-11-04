@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://da1jqj2mvv1bp"
 config/windows_native_icon="res://assets/slothofexile icon.ico"
 
+[autoload]
+
+StartupCheck="*uid://bil57irnjlitt"
+
 [display]
 
 window/size/borderless=true
