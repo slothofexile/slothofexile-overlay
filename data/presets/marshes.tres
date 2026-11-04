@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://c16gckpnp5r6v"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_gbl8l"]
+
+[resource]
+script = ExtResource("1_gbl8l")
+preset_name = "Ramparts"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-27, 69, 0)
+light_color = Color(0.9999997, 0.955327, 0.88011366, 1)
+light_energy = 0.85
+shadow_blur = 1.0
+ambient_color = Color(0.9254902, 0.85882354, 0.41568628, 1)
+ambient_energy = 0.075
+shadow_opacity = 0.6
+shadow_tint = Color(0.07450981, 0.10980392, 0.09803922, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"

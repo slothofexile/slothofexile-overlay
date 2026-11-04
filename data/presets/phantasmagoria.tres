@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://p4kg84pi81e0"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_yg2dg"]
+
+[resource]
+script = ExtResource("1_yg2dg")
+preset_name = "Phantasmagoria"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-27, 30, 0)
+light_color = Color(0.97991115, 0.8785704, 0.85439605, 1)
+light_energy = 0.5
+shadow_blur = 7.5
+ambient_color = Color(0.19607843, 0.0627451, 0.03529412, 1)
+ambient_energy = 2.0
+shadow_opacity = 0.25
+shadow_tint = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"

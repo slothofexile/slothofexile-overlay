@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://cbabrvmvjkjwp"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_i6r2h"]
+
+[resource]
+script = ExtResource("1_i6r2h")
+preset_name = "Reef"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-22, -85, 0)
+light_color = Color(1, 0.9529412, 0.8784314, 1)
+light_energy = 0.3
+ambient_color = Color(0.20392157, 0.28627452, 0.36862746, 1)
+ambient_energy = 3.35
+shadow_opacity = 0.45
+shadow_tint = Color(0.13333334, 0.11764706, 0.10980392, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"

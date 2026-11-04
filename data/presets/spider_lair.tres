@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://cr5f6lvnfucw0"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_nllpv"]
+
+[resource]
+script = ExtResource("1_nllpv")
+preset_name = "Spider Lair"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-27, 10, 0)
+light_color = Color(0.7824303, 0.8669392, 0.83236194, 1)
+light_energy = 0.6
+shadow_blur = 7.5
+ambient_color = Color(0.78431374, 0.8666667, 0.83137256, 1)
+ambient_energy = 0.1
+shadow_opacity = 0.67
+shadow_tint = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"

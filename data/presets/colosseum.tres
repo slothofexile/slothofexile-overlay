@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://dj8inxg7ludb2"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_puret"]
+
+[resource]
+script = ExtResource("1_puret")
+preset_name = "Colosseum"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-22, 90, 0)
+light_color = Color(0.78431374, 0.8901961, 0.9411765, 1)
+light_energy = 0.75
+shadow_blur = 1.0
+ambient_color = Color(0.78431374, 0.8901961, 0.9411765, 1)
+ambient_energy = 0.075
+shadow_opacity = 0.32
+shadow_tint = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"

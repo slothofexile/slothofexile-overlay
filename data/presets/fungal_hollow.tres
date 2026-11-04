@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AreaPreset" format=3 uid="uid://cdveu3i3ham6t"]
+
+[ext_resource type="Script" uid="uid://ctwl5000i8dfu" path="res://data/area_preset.gd" id="1_cwydb"]
+
+[resource]
+script = ExtResource("1_cwydb")
+preset_name = "Fungal Hollow"
+camera_position = Vector3(0, 10, 5.5)
+camera_rotation_degrees = Vector3(-60, 0, 0)
+light_rotation_degrees = Vector3(-27, 35, 0)
+light_color = Color(0.99999994, 0.9362581, 0.24672657, 1)
+light_energy = 0.45
+shadow_blur = 5.0
+ambient_color = Color(0.9254902, 0.85882354, 0, 1)
+ambient_energy = 0.075
+shadow_opacity = 0.6
+shadow_tint = Color(0, 0.07058824, 0, 1)
+metadata/_custom_type_script = "uid://ctwl5000i8dfu"
