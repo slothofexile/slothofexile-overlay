@@ -26,7 +26,7 @@ extends Node
 @export var world_environment: WorldEnvironment
 @export var shadow_plane: GeometryInstance3D
 @export var area_manager: Node
-@export var target_preset_name: String = "Monastery of the Keepers"
+@export var target_preset_name: String = "Reef"
 
 @export_category("Tuning Step Amounts")
 @export var angle_step_degrees: float = 5.0
@@ -144,6 +144,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	if key == KEY_P or key == KEY_SPACE:
 		_print_current_preset_values()
 		handled = true
+		
+		
+	# ----------------------------------------------------
+	# SHADOW BLUR (Insert / Delete)
+	# ----------------------------------------------------
+	if directional_light:
+		if key == KEY_INSERT:
+			directional_light.shadow_blur += 0.05
+			print("[PresetTuner] Shadow Blur: %.2f" % directional_light.shadow_blur)
+			handled = true
+		elif key == KEY_DELETE:
+			directional_light.shadow_blur = maxf(0.0, directional_light.shadow_blur - 0.05)
+			print("[PresetTuner] Shadow Blur: %.2f" % directional_light.shadow_blur)
+			handled = true
 
 
 	
@@ -166,4 +180,7 @@ func _print_current_preset_values() -> void:
 		var mat = shadow_plane.material_override as ShaderMaterial
 		var lin: Vector3 = mat.get_shader_parameter("shadow_color")
 		var tint := Color(lin.x, lin.y, lin.z).linear_to_srgb()
-		print("  └─ Shadow Opacity: %.2f | Tint: #%s | Alpha: %d" % [float(mat.get_shader_parameter("shadow_opacity")), tint.to_html(false), roundi(tint.a * 255.0)])
+		print("  ├─ Shadow Opacity: %.2f | Tint: #%s | Alpha: %d" % [float(mat.get_shader_parameter("shadow_opacity")), tint.to_html(false), roundi(tint.a * 255.0)])
+		
+	if directional_light:
+		print("	 └─ Shadow Blur: %.2f" % directional_light.shadow_blur)

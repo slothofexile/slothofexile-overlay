@@ -24,12 +24,12 @@ extends Node3D
 
 # apparently there are better ways to implement model size adjustments in Godot
 # but using camera FOV is the simplest/quickest way to implement quasi-size adjustment 
-# originally managed by overlay_main, I later moved it to the .tres resource files
-# and now I moved it again to the settings_manager, updating overlay_main
+# originally managed by overlay_main, then moved it to the .tres resource files
+# then moved again to the settings_manager, updating overlay_main
 @export_category("Camera Zoom")
 
 # 90 looks decent on 1920 x 1080
-# kept limits to 90 + or - 20 to limit distortion at extreme values (0 and 180)
+# kept limits to 90 + or - 20 to avoid distortion at extreme values (0 and 180)
 @export var camera_zoom: float = 90
 
 
@@ -37,7 +37,8 @@ extends Node3D
 
 # mouse tracking / rotation speed
 # eyeballing -- 20 seems to work ok, 10 too slow for me
-@export var rotation_speed: float = 60.0
+@export var rotation_speed: float = 20.0
+
 # ********* todo for future me --- build a jumping option for leap slammers
 # though I expect that variable atk spd and hang time would be a pain to implement accurately
 
@@ -130,6 +131,8 @@ func _update_cached_offsets() -> void:
 	# if func is called after either node already torn down
 	if not is_instance_valid(camera) or not is_instance_valid(target_model):
 		return
+	
+	# sooo many places it can crash :(
 
 	var screen_size = get_viewport().get_visible_rect().size
 
@@ -165,9 +168,9 @@ func _process(delta: float) -> void:
 		else:
 			return
 
-	# 2nd check prevents runtime crash with possible race condition
+	# 2nd check and return prevents runtime crash with possible race condition
 	# on app start (frame 1) when camera hasn't been registered yet
-	# succeeding iteration can then safely grab camera on frame 2 onwards
+	# succeeding iteration can (should?) then safely grab camera on frame 2 onwards
 	if not camera:
 		camera = get_viewport().get_camera_3d()
 		if not camera:
@@ -224,11 +227,7 @@ func _process(delta: float) -> void:
 		wave_pitch = wave_phase * deg_to_rad(wave_rocking)
 		wave_roll = wave_phase * deg_to_rad(wave_rocking * 0.5)
 
-	target_model.position = (
-		base_position
-		+ world_pixel_offset
-		+ Vector3(0, wave_y, 0)
-	)
+	target_model.position = (base_position + world_pixel_offset + Vector3(0, wave_y, 0))
 
 	target_model.rotation.x = wave_pitch
 	target_model.rotation.z = wave_roll
@@ -236,7 +235,7 @@ func _process(delta: float) -> void:
 
 # the settings_manager needs to toggle this whenever the settings window is open to allow interaction with it
 # 
-# known issue(?) 
+# known issue (ignored for now, sorry):
 # the Godot viewport width and height still determines the click through area regardless of this setting
 # so even a visually small settings window will block off clicking beyond its visible borders up to the borders of the viewport
 func set_click_through(enabled: bool) -> void:

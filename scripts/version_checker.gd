@@ -6,7 +6,7 @@
 class_name VersionChecker
 extends Node
 
-@export var current_version: String = "3.29_v15"
+@export var current_version: String = "3.29_v18"
 @export var github_repo: String = "slothofexile/slothofexile-overlay"
 @export var overlay_main: Node3D
 

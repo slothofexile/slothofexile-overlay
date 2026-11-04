@@ -7,8 +7,6 @@ extends Node
 
 signal preset_changed(preset_name: String)
 
-const PRESET_DIR_PATH: String = "res://data/presets/"
-
 @export_group("Global Settings")
 @export var window_pixel_offset: Vector2i = Vector2i.ZERO 
 
@@ -21,79 +19,77 @@ const PRESET_DIR_PATH: String = "res://data/presets/"
 @export var log_reader: Node
 
 # drag/drop .tres files into this array in the inspector
-@export var presets: Array[AreaPreset] = []
+# @export var presets: Array[AreaPreset] = []
 
 # I just use this to more easily make area presets 
 # (loading an area without needing to read log file)
 # but this is almost immediately overwritten by the 1st town loading when in-game
-@export var default_preset_name: String = "Monastery of the Keepers"
+## @export var default_preset_name: String = "Karui Shores"
+@export var default_preset_name: String = "Karui Shores"
+
 
 var preset_map: Dictionary = {}
 
 func _ready() -> void:
-	# offset OS window 
 	if window_pixel_offset != Vector2i.ZERO:
-		var current_pos = DisplayServer.window_get_position()
-		DisplayServer.window_set_position(current_pos + window_pixel_offset)
-
-	_load_presets_from_dir()
-
-	# index presets manually assigned in inspector
-	for p in presets:
-		if p and p.preset_name != "":
-			preset_map[p.preset_name] = p
-
-	print("[AreaManager] Final loaded preset keys in map (%d): %s" % [preset_map.size(), preset_map.keys()])
-
-	# connect log reader signal if assigned
-	if is_instance_valid(log_reader) and log_reader.has_signal("area_entered"):
-		log_reader.area_entered.connect(_on_area_entered)
-
-	# automatically apply default preset on start
-	if default_preset_name != "":
-		apply_preset(default_preset_name)
-
-func _load_presets_from_dir() -> void:
-	var dir = DirAccess.open(PRESET_DIR_PATH)
-	if not dir:
-		print("[AreaManager] ERROR: Could not open directory at path: ", PRESET_DIR_PATH)
-		return
-
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-
-	while file_name != "":
-		if not dir.current_is_dir():
-			# handle .remap / .import files in editor or exported builds
-			var clean_file_name = file_name.replace(".remap", "").replace(".import", "")
-			if clean_file_name.ends_with(".tres"):
-				var full_path = PRESET_DIR_PATH.path_join(clean_file_name)
-				var resource = load(full_path)
-				
-				if resource is AreaPreset:
-					if resource.preset_name != "":
-						preset_map[resource.preset_name] = resource
-						print("[AreaManager] Registered preset file: '%s' -> key: '%s'" % [file_name, resource.preset_name])
-					else:
-						print("[AreaManager] WARN: Resource at '%s' loaded, but its 'preset_name' property is empty!" % full_path)
+		DisplayServer.window_set_position(DisplayServer.window_get_position() + window_pixel_offset)
+	
+	
+	# presets were originally programatically added but AI recommended otherwise
+	# after adding presets to the array manually, I now realize that it's not practical with 150+ areas
+	# so we're going back to the old way
+	
+	# ಠ_ಠ >>> └[•-•]┘
+	
+ 
+ 
+	var dir := DirAccess.open("res://data/presets/")
+	if dir == null:
+		# fail loudly instead of silently ending up with an empty preset_map
+		push_error("[AreaManager] Cannot open res://data/presets/ (error %d)" % DirAccess.get_open_error())
+	else:
+		dir.list_dir_begin()
+		var file_name := dir.get_next()
+		while file_name != "":
+			
+			# turns out that in an exported build, the folder structure becomes <area>.tres.remap instead of <area>.tres
+			# (and ".import" for some resource types), so the extension needs to be stripped to get the real path
+			var clean_name := file_name.trim_suffix(".remap").trim_suffix(".import")
+			if not dir.current_is_dir() and clean_name.get_extension() == "tres":
+				var p := load("res://data/presets/" + clean_name) as AreaPreset
+				if p and p.preset_name != "":
+					preset_map[p.preset_name] = p
 				else:
-					var res_type = resource.get_class() if resource else "null"
-					print("[AreaManager] WARN: Resource at '%s' is not an AreaPreset (Type: %s)" % [full_path, res_type])
+					push_warning("[AreaManager] Skipped '%s' (not an AreaPreset or has no preset_name)" % clean_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
 
-		file_name = dir.get_next()
+	print("[AreaManager] Loaded %d presets: %s" % [preset_map.size(), preset_map.keys()])
 
-	dir.list_dir_end()
+	log_reader.area_entered.connect(_on_area_entered)
+	apply_preset(default_preset_name)
+
 
 func _on_area_entered(raw_area_name: String) -> void:
 	print("[AreaManager] Signal received for area: '%s'" % raw_area_name)
 	apply_preset(raw_area_name)
+
 
 func apply_preset(preset_name: String) -> void:
 	print("[AreaManager] Attempting to apply preset: '%s'" % preset_name)
 
 	if not preset_map.has(preset_name):
 		push_warning("[AreaManager] Area preset '%s' not found! Registered keys: %s" % [preset_name, preset_map.keys()])
-		return
+		
+		# just so a missing preset doesn't crash the whole thing
+		# setting the default as Karui Shores which I think 95% of player's starting town by endgame
+		# though I do wish GGG could just set our HO as the starting town like players have been asking for
+		preset_name = "Karui Shores"
+		
+		# if even the fallback is missing (e.g. presets failed to load in an export) there is nothing to apply
+		if not preset_map.has(preset_name):
+			push_error("[AreaManager] Fallback preset '%s' is missing too, nothing to apply" % preset_name)
+			return
 		
 	var data: AreaPreset = preset_map[preset_name]
 	
@@ -129,9 +125,9 @@ func apply_preset(preset_name: String) -> void:
 	var mat = shadow_plane.material_override
 	var linear_tint = data.shadow_tint.srgb_to_linear()
 	var shadow_rgb = Vector3(linear_tint.r, linear_tint.g, linear_tint.b)
+
 	mat.set_shader_parameter("shadow_color", shadow_rgb)
 	mat.set_shader_parameter("shadow_opacity", data.shadow_opacity)
-
 
 	preset_changed.emit(preset_name)
 
