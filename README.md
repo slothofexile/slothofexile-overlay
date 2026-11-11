@@ -1,9 +1,10 @@
-<img width="1923" height="1083" alt="image" src="https://github.com/user-attachments/assets/a75514c0-18a2-4532-ad92-f2f106ea1a2b" />
-
-[![Watch the video](https://youtube.com)](https://youtu.be/nuFQWeiMySc)
+<img width="1923" height="1083" alt="image" src="https://github.com/user-attachments/assets/ce3678b1-d13b-4a30-afe9-8f2b819c41ad" />
 
 
 
+
+
+Gameplay video here: https://www.youtube.com/watch?v=wyKCeeHT-MU
 
 
 
@@ -19,7 +20,7 @@ I started playing Path of Exile around Legacy league and I had always wanted to 
 
 As of this writing (3.29 Allflame League on PoE1), the model I have on it is Cheems the Shiba, on a boat with a fishing rod, complete with pirate flag, pirate hat and eyepatch.
 
-Just ignore most of my comments throughout the codebase as they're mostly for my children (who I hope would contribute to the project someday). Commenting code always felt like a chore, but my son is taking up CS right now so I'm just trying to set a good example. (It's somehow less of a chore if I think about it that way -- that he'll be reading those eventually.)
+My many comments throughout the codebase are mostly for my children (who I hope would contribute to the project someday). Commenting code always felt like a chore, but my son is taking up CS right now so I'm just trying to set a good example. Somehow it also feels less like a chore if I think about it that way.
 
 (My daughter's first contribution is the logo/icon!)
 
@@ -110,30 +111,35 @@ Having said that, I do think that AI usage is still probably tiny compared to a 
 
 # **How To:**
 
-Just run the exe and the overlay should appear in your primary monitor. It should also appear on your taskbar. (That's the default icon for Godot games -- I have yet to make my own icon.)
+First, run overlay exe and the overlay should appear in your primary monitor. The icon and program name should also appear on your taskbar:
 
-<img width="167" height="59" alt="image" src="https://github.com/user-attachments/assets/8d0e2a61-8f0a-45af-85af-d45fd861080f" />
+<img width="483" height="62" alt="image" src="https://github.com/user-attachments/assets/834508c7-63c4-4343-a074-9f92e03574ef" />
 
-**_If the overlay goes missing for some reason (such as switching between open windows, or using Win+D to show the desktop, just click the taskbar icon to have the overlay appear on top again._
+The overlay icon should also appear on your system tray:
+
+<img width="260" height="150" alt="image" src="https://github.com/user-attachments/assets/87e67c52-7518-4d9e-86bd-310e77ba3c21" />
+
+
+
+**_If the overlay goes missing for some reason (such as switching between open windows, or using Win+D to show the desktop, just click the taskbar icon/program name to have the overlay appear on top again._
 
 <br>
 <br>
-<br>
 
+Next, run **Path of Exile 1** in **Windowed Fullscreen** mode. 
 
-
-From there, just start Path of Exile and the Overlay should still stay on top of that window. Almost perfect position for the title screen.
+(The overlay will technically work on top of anything, even on top of the bare desktop, so it should still work on top of PoE2 if you want to use it with that. (Though you wouldn't have the lighting and shadow area presets that goes with PoE1.)
 
 <img width="1921" height="1081" alt="image" src="https://github.com/user-attachments/assets/6c00a803-dc69-45bd-8e49-4807d84da8d6" />
 
-**_If you have more than one monitor and the overlay appears on a different monitor than where you have Path of Exile playing, just use the Windows hotkey Win + Shift + Left (or Right) Arrow to move the overlay where you need it._
+**_If you have more than one monitor and the overlay appears on a different monitor than where your game is playing, just use the Windows hotkey Win + Shift + Left (or Right) Arrow to move the overlay to where you need it._
 
 <br>
 <br>
 
 To change Overlay Settings, just right-click the system tray icon and click **Settings**.
 
-<img width="216" height="142" alt="image" src="https://github.com/user-attachments/assets/74f99061-3cb0-4ab3-a379-587f6409469e" />
+<img width="225" height="201" alt="image" src="https://github.com/user-attachments/assets/2e672aea-18e0-44c5-ae44-c5ac91f0e412" />
 
 
 <br>
@@ -149,20 +155,22 @@ This opens the **Overlay Settings** panel:
 - enable **wave motion**, just enables or disables the simulated water bobbing.
 - Client.txt Log Paths need to be set correctly for the overlay to know the Areas you enter. It uses this info to set the appropriate lighting/shadow and colors to match the environment.
 
-  
-_** it only has these presets for now (karui shores, coastal hideout, the sovereign, the fathomless depths)._
 <br>
 <br>
 
 
-When you want to quit the overlay, just click on the taskbar icon(?) and click Close Window.
+When you want to quit the overlay, just right click on the taskbar icon/program name and click **Close Window**.
 
-<img width="416" height="148" alt="image" src="https://github.com/user-attachments/assets/9e8d3736-c9ab-47c6-9f6f-c6eb6bb84e65" />
+<img width="381" height="181" alt="image" src="https://github.com/user-attachments/assets/8e795a35-fc48-4064-ac70-2e76f94a55e5" />
+
+
 
 <br>
 
 You can also click the system tray icon, and click **Exit**.
 
-<img width="216" height="142" alt="image" src="https://github.com/user-attachments/assets/56da76a1-89fe-4b59-9681-1b4d8d198d6d" />
+<img width="359" height="178" alt="image" src="https://github.com/user-attachments/assets/67d18c0d-8c65-4988-8971-ff2a791bb2ce" />
+
+
 
 
