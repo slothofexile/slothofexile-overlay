@@ -170,7 +170,8 @@ When you want to quit the overlay, just right click on the taskbar icon/program 
 
 You can also click the system tray icon, and click **Exit**.
 
-<img width="359" height="178" alt="image" src="https://github.com/user-attachments/assets/67d18c0d-8c65-4988-8971-ff2a791bb2ce" />
+<img width="282" height="198" alt="image" src="https://github.com/user-attachments/assets/4628de95-10b3-4ba5-a965-0411232bb0ab" />
+
 
 
 
