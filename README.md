@@ -1,7 +1,8 @@
-<img width="1923" height="1083" alt="image" src="https://github.com/user-attachments/assets/ce3678b1-d13b-4a30-afe9-8f2b819c41ad" />
-
-
-
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/ce3678b1-d13b-4a30-afe9-8f2b819c41ad" />
+<br>
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/c7a34b65-abe2-46d3-9376-bcb4a5568ee3" />
+<br>
+<br>
 
 
 Gameplay video here: https://www.youtube.com/watch?v=wyKCeeHT-MU
